@@ -16,7 +16,7 @@ public class SpellBehaviour : MonoBehaviour
         Destroy(gameObject, 10f);
         randomPos = new Vector3(Random.Range(-8, 8), -1, Random.Range(5, 15));
     }
-    private void FixedUpdate()
+    private void Update()
     {
         if (target)
             transform.position = Vector3.Lerp(transform.position, target.transform.position, 5f * Time.deltaTime);

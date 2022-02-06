@@ -59,13 +59,11 @@ public class PlayerAnimator : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Hero Slashes");
         transform.position += (transform.position - pos).normalized;
         float savedSpeed = animator.speed;
-        animator.speed = 0;
         agent.isStopped = true;
         body.constraints = RigidbodyConstraints.FreezePosition;
         yield return new WaitForSeconds(.2f);
         body.constraints = RigidbodyConstraints.None;
         agent.isStopped = false;
-        animator.speed = savedSpeed;
     }
     IEnumerator NormalizedSpeed()
     {
