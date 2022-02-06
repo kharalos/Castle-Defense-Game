@@ -1,0 +1,810 @@
+Using pre-set license
+Built from '2020.3/staging' branch; Version is '2020.3.26f1 (7298b473bc1a) revision 7510196'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10  (10.0.19044) 64bit Professional' Language: 'tr' Physical Memory: 16319 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.26f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker0
+-projectPath
+C:/Users/Kharalos/Desktop/Unity/castle-defense
+-logFile
+Logs/AssetImportWorker0.log
+-srvPort
+65005
+Successfully changed project path to: C:/Users/Kharalos/Desktop/Unity/castle-defense
+C:/Users/Kharalos/Desktop/Unity/castle-defense
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 90.30 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.26f1 (7298b473bc1a)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.26f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/Kharalos/Desktop/Unity/castle-defense/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1660 Ti (ID=0x2182)
+    Vendor:   
+    VRAM:     5991 MB
+    Driver:   30.0.15.1123
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.26f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.26f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.26f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56052
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.26f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.26f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.003854 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 65.60 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.791 seconds
+Domain Reload Profiling:
+	ReloadAssembly (791ms)
+		BeginReloadAssembly (70ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (621ms)
+			LoadAssemblies (66ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (200ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (37ms)
+			SetupLoadedEditorAssemblies (231ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (66ms)
+				BeforeProcessingInitializeOnLoad (24ms)
+				ProcessInitializeOnLoadAttributes (102ms)
+				ProcessInitializeOnLoadMethodAttributes (32ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.005221 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 68.89 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.476 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1477ms)
+		BeginReloadAssembly (206ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (6ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (26ms)
+		EndReloadAssembly (1166ms)
+			LoadAssemblies (127ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (369ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (53ms)
+			SetupLoadedEditorAssemblies (442ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (69ms)
+				BeforeProcessingInitializeOnLoad (104ms)
+				ProcessInitializeOnLoadAttributes (234ms)
+				ProcessInitializeOnLoadMethodAttributes (16ms)
+				AfterProcessingInitializeOnLoad (13ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.08 seconds
+Refreshing native plugins compatible for Editor in 0.87 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1874 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 180.5 MB.
+System memory in use after: 180.6 MB.
+
+Unloading 43 unused Assets to reduce memory usage. Loaded Objects now: 2337.
+Total: 4.174400 ms (FindLiveObjects: 0.220100 ms CreateObjectMapping: 0.062100 ms MarkObjects: 3.802600 ms  DeleteObjects: 0.088300 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  path: Assets/Prefabs/Scene/Bastion.prefab
+  artifactKey: Guid(b8c7dd66dae5ea544a95e833805b6dbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Scene/Bastion.prefab using Guid(b8c7dd66dae5ea544a95e833805b6dbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94afdaaef42e5f997b56d3e76f69f4fc') in 0.202211 seconds 
+  Import took 0.205875 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000247 seconds.
+  path: Assets/Prefabs/Scene/Castle Wall.prefab
+  artifactKey: Guid(186b217b4bdd9f44ca21d36ec9a17891) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Scene/Castle Wall.prefab using Guid(186b217b4bdd9f44ca21d36ec9a17891) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd2152f8cc28450f0ef36131439b2601d') in 0.048456 seconds 
+  Import took 0.052382 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 388.741925 seconds.
+  path: Assets/Textures/Castle Textures/NM_Castle.png
+  artifactKey: Guid(91395146f3bc76545b0dcea210a89f45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Castle Textures/NM_Castle.png using Guid(91395146f3bc76545b0dcea210a89f45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '456ace50032a40c98ffee398178f8c6e') in 0.111113 seconds 
+  Import took 0.118203 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.388226 seconds.
+  path: Assets/Textures/Castle Textures/NM_Castle.png
+  artifactKey: Guid(91395146f3bc76545b0dcea210a89f45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Castle Textures/NM_Castle.png using Guid(91395146f3bc76545b0dcea210a89f45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3cf870e4c4a8ec5d2835f8a75b6c72ca') in 0.057561 seconds 
+  Import took 0.062286 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003982 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.99 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.240 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1241ms)
+		BeginReloadAssembly (152ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (42ms)
+		EndReloadAssembly (997ms)
+			LoadAssemblies (113ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (330ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (48ms)
+			SetupLoadedEditorAssemblies (374ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (8ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (116ms)
+				ProcessInitializeOnLoadAttributes (225ms)
+				ProcessInitializeOnLoadMethodAttributes (13ms)
+				AfterProcessingInitializeOnLoad (10ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Switching build target platform(19) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395204) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.74 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1859 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 181.8 MB.
+System memory in use after: 181.9 MB.
+
+Unloading 38 unused Assets to reduce memory usage. Loaded Objects now: 2348.
+Total: 3.830800 ms (FindLiveObjects: 0.193400 ms CreateObjectMapping: 0.050400 ms MarkObjects: 3.553900 ms  DeleteObjects: 0.031600 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005173 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.72 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.399 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1401ms)
+		BeginReloadAssembly (164ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (8ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (44ms)
+		EndReloadAssembly (1131ms)
+			LoadAssemblies (136ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (413ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (59ms)
+			SetupLoadedEditorAssemblies (364ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (8ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (109ms)
+				ProcessInitializeOnLoadAttributes (222ms)
+				ProcessInitializeOnLoadMethodAttributes (13ms)
+				AfterProcessingInitializeOnLoad (11ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (7ms)
+Platform modules already initialized, skipping
+Switching build target platform(19) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395204) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.73 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1859 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 181.8 MB.
+System memory in use after: 181.9 MB.
+
+Unloading 38 unused Assets to reduce memory usage. Loaded Objects now: 2350.
+Total: 3.698300 ms (FindLiveObjects: 0.210800 ms CreateObjectMapping: 0.058400 ms MarkObjects: 3.398800 ms  DeleteObjects: 0.028900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005005 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.07 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.346 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1347ms)
+		BeginReloadAssembly (167ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (7ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (44ms)
+		EndReloadAssembly (1088ms)
+			LoadAssemblies (132ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (358ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (65ms)
+			SetupLoadedEditorAssemblies (369ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (6ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (114ms)
+				ProcessInitializeOnLoadAttributes (224ms)
+				ProcessInitializeOnLoadMethodAttributes (13ms)
+				AfterProcessingInitializeOnLoad (10ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Switching build target platform(19) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395204) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.72 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1859 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 181.8 MB.
+System memory in use after: 181.9 MB.
+
+Unloading 38 unused Assets to reduce memory usage. Loaded Objects now: 2352.
+Total: 3.985800 ms (FindLiveObjects: 0.421800 ms CreateObjectMapping: 0.077500 ms MarkObjects: 3.458100 ms  DeleteObjects: 0.026200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 404.876899 seconds.
+  path: Assets/Scripts/GameManager.cs
+  artifactKey: Guid(46d233b3a14e9054fbe9e310fa993d54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/GameManager.cs using Guid(46d233b3a14e9054fbe9e310fa993d54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5cdd7ca8395c29a3519fc7ea73ca5d41') in 0.029789 seconds 
+  Import took 0.041177 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1870.991444 seconds.
+  path: Assets/Textures/Fort Wall/coral_fort_wall_03_diff_1k.jpg
+  artifactKey: Guid(7c39639406abb0946927ee897c59acc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/coral_fort_wall_03_diff_1k.jpg using Guid(7c39639406abb0946927ee897c59acc8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5072af98096a0df2d8d5858a36955873') in 0.085824 seconds 
+  Import took 0.089694 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.744103 seconds.
+  path: Assets/Textures/Fort Wall/coral_fort_wall_03_disp_1k.png
+  artifactKey: Guid(390026053b481a74b97c29387616e71a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/coral_fort_wall_03_disp_1k.png using Guid(390026053b481a74b97c29387616e71a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '13e4fa93c729d4539bd9687ae9baf6cd') in 0.033864 seconds 
+  Import took 0.038286 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.696858 seconds.
+  path: Assets/Textures/Fort Wall/coral_fort_wall_03_nor_gl_1k.exr
+  artifactKey: Guid(21f16b181b87c3541bfd580bb1fd1cb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/coral_fort_wall_03_nor_gl_1k.exr using Guid(21f16b181b87c3541bfd580bb1fd1cb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '370bac4f7cc835e12edbd4834623b673') in 0.081029 seconds 
+  Import took 0.084828 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.300356 seconds.
+  path: Assets/Textures/Fort Wall/coral_fort_wall_03_rough_1k.exr
+  artifactKey: Guid(761c73c7aa6c86d4c804accc5778e7d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/coral_fort_wall_03_rough_1k.exr using Guid(761c73c7aa6c86d4c804accc5778e7d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '61084358ae72f44020211537591106f1') in 0.034134 seconds 
+  Import took 0.043417 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.812883 seconds.
+  path: Assets/Textures/Fort Wall/coral_fort_wall_03_nor_gl_1k.exr
+  artifactKey: Guid(21f16b181b87c3541bfd580bb1fd1cb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/coral_fort_wall_03_nor_gl_1k.exr using Guid(21f16b181b87c3541bfd580bb1fd1cb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8223e1492d2ccf314dacb242b7d96fa3') in 0.039325 seconds 
+  Import took 0.043595 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.124863 seconds.
+  path: Assets/Textures/Fort Wall
+  artifactKey: Guid(6096d411940b4df4883c4b1923b46781) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall using Guid(6096d411940b4df4883c4b1923b46781) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '11144ab1570af9c63bde0c56e388631b') in 0.010906 seconds 
+  Import took 0.014759 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 183.267312 seconds.
+  path: Assets/Textures/Fort Wall/coral_fort_wall_03_disp_1k.png
+  artifactKey: Guid(390026053b481a74b97c29387616e71a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/coral_fort_wall_03_disp_1k.png using Guid(390026053b481a74b97c29387616e71a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '26c76d3b61bc060573f476e73fae3190') in 0.049845 seconds 
+  Import took 0.054141 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.659888 seconds.
+  path: Assets/Textures/Fort Wall/coral_fort_wall_03_rough_1k.exr
+  artifactKey: Guid(761c73c7aa6c86d4c804accc5778e7d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/coral_fort_wall_03_rough_1k.exr using Guid(761c73c7aa6c86d4c804accc5778e7d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0441b605489dc22612953d9a7de1d7b') in 0.047287 seconds 
+  Import took 0.051587 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.795276 seconds.
+  path: Assets/Textures/Fort Wall/coral_fort_wall_03_rough_1k.exr
+  artifactKey: Guid(761c73c7aa6c86d4c804accc5778e7d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/coral_fort_wall_03_rough_1k.exr using Guid(761c73c7aa6c86d4c804accc5778e7d8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '483b40af9307778394bb4992b12d393d') in 0.036790 seconds 
+  Import took 0.041397 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 273.986277 seconds.
+  path: Assets/Textures/Fort Wall/coral_fort_wall_03_2k.gltf
+  artifactKey: Guid(35dc57efdf853d5469d03340f612e79c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/coral_fort_wall_03_2k.gltf using Guid(35dc57efdf853d5469d03340f612e79c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5143a8edfff7455c98255c95d46701b5') in 0.044133 seconds 
+  Import took 0.047933 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.514103 seconds.
+  path: Assets/Textures/Fort Wall/textures
+  artifactKey: Guid(a3f9e4d68599f7f46befd85d3eb6f55b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/textures using Guid(a3f9e4d68599f7f46befd85d3eb6f55b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7539854899b1097ee27f948af954df4') in 0.011149 seconds 
+  Import took 0.014466 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.924358 seconds.
+  path: Assets/Textures/Fort Wall/textures/coral_fort_wall_03_arm_2k.jpg
+  artifactKey: Guid(5f4e6a1853f5cc047ba18a1b1955dd24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/textures/coral_fort_wall_03_arm_2k.jpg using Guid(5f4e6a1853f5cc047ba18a1b1955dd24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4dccb409196f555c925326d175cc81f') in 0.122238 seconds 
+  Import took 0.125698 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.323464 seconds.
+  path: Assets/Textures/Fort Wall/textures/coral_fort_wall_03_diff_2k.jpg
+  artifactKey: Guid(e118c6d3a9f24b24085d38f294f2ab8d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/textures/coral_fort_wall_03_diff_2k.jpg using Guid(e118c6d3a9f24b24085d38f294f2ab8d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84b3536ca7248249e80cfabe26fdbbcf') in 0.068453 seconds 
+  Import took 0.072759 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 120.253777 seconds.
+  path: Assets/Textures/Castle Textures/coral_fort_wall_03_1k.blend
+  artifactKey: Guid(7447d77a159f1b943a2b77aff741defb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Castle Textures/coral_fort_wall_03_1k.blend using Guid(7447d77a159f1b943a2b77aff741defb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f61af333b1c579666e8eedc95c58b57b') in 0.587485 seconds 
+  Import took 0.591691 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 30.401678 seconds.
+  path: Assets/Textures/Castle Textures/coral_fort_wall_03_1k.blend
+  artifactKey: Guid(7447d77a159f1b943a2b77aff741defb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Castle Textures/coral_fort_wall_03_1k.blend using Guid(7447d77a159f1b943a2b77aff741defb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc70d944449959922622b89198ca19bc') in 0.105271 seconds 
+  Import took 0.109859 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 71.802434 seconds.
+  path: Assets/Textures/Fort Wall/textures/coral_fort_wall_03_nor_gl_2k.jpg
+  artifactKey: Guid(1131db8a3f0bf964fb37e16243bbd236) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/textures/coral_fort_wall_03_nor_gl_2k.jpg using Guid(1131db8a3f0bf964fb37e16243bbd236) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a835737759c2e6c5ef2f14bd27623f05') in 0.072465 seconds 
+  Import took 0.076497 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.334342 seconds.
+  path: Assets/Textures/Fort Wall/textures/coral_fort_wall_03_nor_gl_2k.jpg
+  artifactKey: Guid(1131db8a3f0bf964fb37e16243bbd236) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/textures/coral_fort_wall_03_nor_gl_2k.jpg using Guid(1131db8a3f0bf964fb37e16243bbd236) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '49560fe586af42d3be76fcbe0a180a06') in 0.070479 seconds 
+  Import took 0.079716 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 14.223557 seconds.
+  path: Assets/Textures/Fort Wall/coral_fort_wall_03.bin
+  artifactKey: Guid(ee7019ddaad47854991844ceb6274d6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/coral_fort_wall_03.bin using Guid(ee7019ddaad47854991844ceb6274d6b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '585a59aba6cff24891a1fb9e47c66e2a') in 0.014481 seconds 
+  Import took 0.017561 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 44.887889 seconds.
+  path: Assets/Textures/Castle Textures/textures/coral_fort_wall_03_diff_1k.jpg
+  artifactKey: Guid(944adf6cafb9e8849900ee3e3df91800) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Castle Textures/textures/coral_fort_wall_03_diff_1k.jpg using Guid(944adf6cafb9e8849900ee3e3df91800) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ef5d329567865f9abd2e8822ebe68296') in 0.033602 seconds 
+  Import took 0.038023 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000185 seconds.
+  path: Assets/Textures/Castle Textures/textures/coral_fort_wall_03_disp_1k.png
+  artifactKey: Guid(92524b5a3994f204d968bb09515a03f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Castle Textures/textures/coral_fort_wall_03_disp_1k.png using Guid(92524b5a3994f204d968bb09515a03f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adf2b052a12bab255a157488cd727e22') in 0.029286 seconds 
+  Import took 0.033696 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000091 seconds.
+  path: Assets/Textures/Castle Textures/textures/coral_fort_wall_03_nor_gl_1k.exr
+  artifactKey: Guid(3a3fb6c5e7fb6434db18cf48ea83a021) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Castle Textures/textures/coral_fort_wall_03_nor_gl_1k.exr using Guid(3a3fb6c5e7fb6434db18cf48ea83a021) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0603d26a2940169b4af859f227e7bf7d') in 0.044198 seconds 
+  Import took 0.049635 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 955.285394 seconds.
+  path: Assets/Textures/metal-texture-background-illustration-vector.jpg
+  artifactKey: Guid(0ef25e1ef4035ac428de031a23f4171a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/metal-texture-background-illustration-vector.jpg using Guid(0ef25e1ef4035ac428de031a23f4171a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51d136f75310baed01a42526f63f2586') in 0.021697 seconds 
+  Import took 0.027134 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 30.660260 seconds.
+  path: Assets/Textures/Hexagon Grid.jpg
+  artifactKey: Guid(769eccfdf351fcc46a49ce45aeba8890) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Hexagon Grid.jpg using Guid(769eccfdf351fcc46a49ce45aeba8890) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adf0ca55fa51d6770fbe8849f9b4899b') in 0.062727 seconds 
+  Import took 0.067525 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 170.429520 seconds.
+  path: Assets/Textures/Fort Wall/castle_wall_slates_2k.blend
+  artifactKey: Guid(5134311f61fdf534f95254d317f977e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/castle_wall_slates_2k.blend using Guid(5134311f61fdf534f95254d317f977e2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b077a23fa3bddcc89a3b822d520334c6') in 0.187965 seconds 
+  Import took 0.191859 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000236 seconds.
+  path: Assets/Materials/Scene/CastleMat.mat
+  artifactKey: Guid(019a1d7b34035fe4a9bf4287db78645e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Scene/CastleMat.mat using Guid(019a1d7b34035fe4a9bf4287db78645e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9565f53a916621b6b5e08b21efddaaa1') in 0.129253 seconds 
+  Import took 0.132648 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 37.108824 seconds.
+  path: Assets/Materials/Particle Materials/Explosion.mat
+  artifactKey: Guid(e5e16d82861b03f4abe75b6222b798cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Particle Materials/Explosion.mat using Guid(e5e16d82861b03f4abe75b6222b798cd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bfe4b6886baa9c30d14007539cf2fcfa') in 0.114982 seconds 
+  Import took 0.118460 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 23.862271 seconds.
+  path: Assets/Materials/Particle Materials/Halo.mat
+  artifactKey: Guid(916021b902801c147aeeff8a5d981ee2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/Particle Materials/Halo.mat using Guid(916021b902801c147aeeff8a5d981ee2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7b9720532ef23b0c62d230331b016330') in 0.022715 seconds 
+  Import took 0.026628 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 97.047273 seconds.
+  path: Assets/Sprites/UI Top Element.png
+  artifactKey: Guid(9733fd790c2440e44b7547d8a30e79af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/UI Top Element.png using Guid(9733fd790c2440e44b7547d8a30e79af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8196b92f303256f124a38cb1ccf8733') in 0.044636 seconds 
+  Import took 0.048325 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.861692 seconds.
+  path: Assets/Sprites/UI Top Element.png
+  artifactKey: Guid(9733fd790c2440e44b7547d8a30e79af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/UI Top Element.png using Guid(9733fd790c2440e44b7547d8a30e79af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '08f370c9d31fd1480018ffb2d32fd283') in 0.016344 seconds 
+  Import took 0.019754 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 33.338366 seconds.
+  path: Assets/Textures/Fort Wall/textures/castle_wall_slates_nor_gl_2k.exr
+  artifactKey: Guid(e7cceee6fc6bc8c499fe1a81cfc433d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/textures/castle_wall_slates_nor_gl_2k.exr using Guid(e7cceee6fc6bc8c499fe1a81cfc433d9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '185a45a5c99ba6e90a49a86413aeafad') in 0.073158 seconds 
+  Import took 0.076570 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.105890 seconds.
+  path: Assets/Textures/Fort Wall/textures/castle_wall_slates_disp_2k.png
+  artifactKey: Guid(2b08b192ea3d53e45b4767648b1b0f69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/textures/castle_wall_slates_disp_2k.png using Guid(2b08b192ea3d53e45b4767648b1b0f69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b563d668e77a91bf7bbbd7f2cea2d430') in 0.133720 seconds 
+  Import took 0.138297 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.966586 seconds.
+  path: Assets/Textures/Fort Wall/textures/castle_wall_slates_disp_2k.png
+  artifactKey: Guid(2b08b192ea3d53e45b4767648b1b0f69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/textures/castle_wall_slates_disp_2k.png using Guid(2b08b192ea3d53e45b4767648b1b0f69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1e2505f76ac912a1e94685c974c347d7') in 0.081341 seconds 
+  Import took 0.089770 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 24.188883 seconds.
+  path: Assets/Textures/Fort Wall/textures/castle_wall_slates_diff_2k.jpg
+  artifactKey: Guid(975545c148d67a7418df8bd8d7c78107) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/textures/castle_wall_slates_diff_2k.jpg using Guid(975545c148d67a7418df8bd8d7c78107) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3806f392c33370b9a78431bab946ea58') in 0.074551 seconds 
+  Import took 0.078328 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000225 seconds.
+  path: Assets/Textures/Fort Wall/textures/castle_wall_slates_rough_2k.jpg
+  artifactKey: Guid(39a2aaea4178e1f4ba53ad6ac1643d9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/textures/castle_wall_slates_rough_2k.jpg using Guid(39a2aaea4178e1f4ba53ad6ac1643d9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1745a96a0a761838601846162ad31ead') in 0.071227 seconds 
+  Import took 0.075406 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 30.356012 seconds.
+  path: Assets/Textures/Fort Wall/textures/castle_wall_slates_disp_2k.png
+  artifactKey: Guid(2b08b192ea3d53e45b4767648b1b0f69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/textures/castle_wall_slates_disp_2k.png using Guid(2b08b192ea3d53e45b4767648b1b0f69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8dde74455b23cd1a5583559fa3364e4') in 0.075932 seconds 
+  Import took 0.079827 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 31.534622 seconds.
+  path: Assets/Textures/Grass
+  artifactKey: Guid(04f6711102726f94ea78b2eab2fe0f5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass using Guid(04f6711102726f94ea78b2eab2fe0f5e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'abf8198b5f5665faa5f305aaa7bd10d6') in 0.010041 seconds 
+  Import took 0.014391 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 34.648815 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_diff_2k.jpg
+  artifactKey: Guid(c6ac6a4bb6b6ae448b8e5a654664d7f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_diff_2k.jpg using Guid(c6ac6a4bb6b6ae448b8e5a654664d7f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aff4b305a4fb53f3ff419139dd1e5fb8') in 0.078599 seconds 
+  Import took 0.083815 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.852553 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_disp_2k.png
+  artifactKey: Guid(a4f25a83574a65a49a4f4086380e2762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_disp_2k.png using Guid(a4f25a83574a65a49a4f4086380e2762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '690776ed301c997db2d67c8cc066baf4') in 0.081822 seconds 
+  Import took 0.085894 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.272391 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_nor_gl_2k.exr
+  artifactKey: Guid(cab9142d4898fcd4e80cf7046a6d5886) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_nor_gl_2k.exr using Guid(cab9142d4898fcd4e80cf7046a6d5886) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bdbe02a5af1854d8ba4b2857d8a664f7') in 0.088077 seconds 
+  Import took 0.091629 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.516996 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_rough_2k.jpg
+  artifactKey: Guid(80040d494fd10c4498ecb3082550316d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_rough_2k.jpg using Guid(80040d494fd10c4498ecb3082550316d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b8c2196b3dcfa09fc10b58434bbed78') in 0.066157 seconds 
+  Import took 0.074509 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.544999 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_nor_gl_2k.exr
+  artifactKey: Guid(cab9142d4898fcd4e80cf7046a6d5886) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_nor_gl_2k.exr using Guid(cab9142d4898fcd4e80cf7046a6d5886) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8cb3ed34a693bc201c41e9d2691df674') in 0.066253 seconds 
+  Import took 0.069641 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 8.060197 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_disp_2k.png
+  artifactKey: Guid(a4f25a83574a65a49a4f4086380e2762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_disp_2k.png using Guid(a4f25a83574a65a49a4f4086380e2762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7629360518b6b05986b589ae17ea7e3e') in 0.078444 seconds 
+  Import took 0.081776 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 435.633788 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_disp_2k.png
+  artifactKey: Guid(a4f25a83574a65a49a4f4086380e2762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_disp_2k.png using Guid(a4f25a83574a65a49a4f4086380e2762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3cddef0008bdc59f27a20cc03f2e9c0b') in 0.103482 seconds 
+  Import took 0.107482 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 43.272011 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_rough_2k.jpg
+  artifactKey: Guid(80040d494fd10c4498ecb3082550316d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_rough_2k.jpg using Guid(80040d494fd10c4498ecb3082550316d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7d5905ec983c59c47bea84191855ef24') in 0.067786 seconds 
+  Import took 0.071564 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 377.840335 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_rough_2k.jpg
+  artifactKey: Guid(80040d494fd10c4498ecb3082550316d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_rough_2k.jpg using Guid(80040d494fd10c4498ecb3082550316d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f7ba100583022f74c150371b8c3c87e') in 0.068915 seconds 
+  Import took 0.073448 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 185.971152 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_disp_2k.png
+  artifactKey: Guid(a4f25a83574a65a49a4f4086380e2762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_disp_2k.png using Guid(a4f25a83574a65a49a4f4086380e2762) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90dc25806d352b36503b8d63f0573b6b') in 0.100148 seconds 
+  Import took 0.103765 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 130.738958 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_nor_gl_2k.exr
+  artifactKey: Guid(cab9142d4898fcd4e80cf7046a6d5886) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_nor_gl_2k.exr using Guid(cab9142d4898fcd4e80cf7046a6d5886) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3cf2966969ca90d2dea2508c08c11a65') in 0.085226 seconds 
+  Import took 0.088970 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.435948 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_rough_2k.jpg
+  artifactKey: Guid(80040d494fd10c4498ecb3082550316d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_rough_2k.jpg using Guid(80040d494fd10c4498ecb3082550316d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c03aed922798b920d2043880a66b7b3c') in 0.081317 seconds 
+  Import took 0.085271 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.395346 seconds.
+  path: Assets/Textures/Grass/aerial_grass_rock_diff_2k.jpg
+  artifactKey: Guid(c6ac6a4bb6b6ae448b8e5a654664d7f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Grass/aerial_grass_rock_diff_2k.jpg using Guid(c6ac6a4bb6b6ae448b8e5a654664d7f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '127b2f7bf9c5c7d7bd8edb66e26124cb') in 0.085628 seconds 
+  Import took 0.088723 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007265 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.12 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.526 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1527ms)
+		BeginReloadAssembly (255ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (11ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (130ms)
+		EndReloadAssembly (1176ms)
+			LoadAssemblies (133ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (387ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (52ms)
+			SetupLoadedEditorAssemblies (416ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (7ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (112ms)
+				ProcessInitializeOnLoadAttributes (269ms)
+				ProcessInitializeOnLoadMethodAttributes (15ms)
+				AfterProcessingInitializeOnLoad (12ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (8ms)
+Platform modules already initialized, skipping
+Switching build target platform(19) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395204) extendedPlatform(0)
+Refreshing native plugins compatible for Editor in 0.72 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1859 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 182.4 MB.
+System memory in use after: 182.5 MB.
+
+Unloading 38 unused Assets to reduce memory usage. Loaded Objects now: 2396.
+Total: 3.764400 ms (FindLiveObjects: 0.200100 ms CreateObjectMapping: 0.049000 ms MarkObjects: 3.486000 ms  DeleteObjects: 0.027800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 61.108286 seconds.
+  path: Assets/Textures/Fort Wall/textures/castle_wall_slates_diff_2k.jpg
+  artifactKey: Guid(975545c148d67a7418df8bd8d7c78107) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Fort Wall/textures/castle_wall_slates_diff_2k.jpg using Guid(975545c148d67a7418df8bd8d7c78107) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d58ea2ebfcb6a3b668c2de9aeb72340') in 0.109438 seconds 
+  Import took 0.112682 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
