@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     float recordedIntervalTime;
     public GameObject theQueen;
 
+    [SerializeField] private AdsManager adm;
+
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -76,7 +78,7 @@ public class GameManager : MonoBehaviour
         else if (numOfEnemies > 80 && numOfEnemies <= 80)
             phase = 5;
         else if (numOfEnemies > 120)
-            phase = 6;
+            phase = 7;
 
         //Phase system
         switch (phase)
