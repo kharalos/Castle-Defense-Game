@@ -1,29 +1,35 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    const float locoAnimSmoothTime = .1f;
+    private static readonly int Attack = Animator.StringToHash("attack");
+    private static readonly int Jump = Animator.StringToHash("lowJump");
+    private static readonly int HighJumpTrigger = Animator.StringToHash("highJump");
+    private static readonly int SpeedPercent = Animator.StringToHash("speedPercent");
 
-    NavMeshAgent agent;
-    Animator animator;
-    Rigidbody body;
-    Vector3 newPoint;
+    private const float LocoAnimSmoothTime = .1f;
+
+    private NavMeshAgent _agent;
+    private Animator _animator;
+    private Rigidbody _body;
+    private Vector3 _newPoint;
+    
     public float targetingRadius;
-    void Start()
+
+    private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        body = GetComponent<Rigidbody>();
+        _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
+        _body = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        float speedPercent = agent.velocity.magnitude / agent.speed;
-        animator.SetFloat("speedPercent", speedPercent, locoAnimSmoothTime, Time.deltaTime);
+        float speedPercent = _agent.velocity.magnitude / _agent.speed;
+        _animator.SetFloat(SpeedPercent, speedPercent, LocoAnimSmoothTime, Time.deltaTime);
     }
     public void MoveToPoint(Vector3 point, bool holdingTouch)
     {
@@ -35,57 +41,62 @@ public class PlayerAnimator : MonoBehaviour
             Vector3 distance = enemy.transform.position - point;
             if (distance.magnitude < targetingRadius)
             {
-                newPoint = enemy.transform.position;
+                _newPoint = enemy.transform.position;
                 thereIsTarget = true;
             }
-            if (!enemy.GetComponent<EnemyBehaviour>().EnemyIsAlive)
+            if (!enemy.GetComponent<EnemyBehaviour>().enemyIsAlive)
                 thereIsTarget = false;
         }
-        if (FindObjectOfType<GameManager>().enemyTargeting && thereIsTarget && holdingTouch)
+        if (FindFirstObjectByType<GameManager>().enemyTargeting && thereIsTarget && holdingTouch)
         {
-            agent.SetDestination(newPoint);
+            _agent.SetDestination(_newPoint);
         }
         else
-            agent.SetDestination(point);
+            _agent.SetDestination(point);
     }
     public void Hastened()
     {
-        agent.speed = agent.speed * 1.5f;
-        animator.speed = animator.speed * 1.5f;
+        _agent.speed *= 1.5f;
+        _animator.speed *= 1.5f;
         StartCoroutine(NormalizedSpeed());
     }
     public IEnumerator HeroKnockedback(Vector3 pos)
     {
-        FindObjectOfType<AudioManager>().Play("Hero Slashes");
+        AudioManager.Instance.Play("Hero Slashes");
         transform.position += (transform.position - pos).normalized;
-        float savedSpeed = animator.speed;
-        agent.isStopped = true;
-        body.constraints = RigidbodyConstraints.FreezePosition;
+        float savedSpeed = _animator.speed;
+        _agent.isStopped = true;
+        _body.constraints = RigidbodyConstraints.FreezePosition;
         yield return new WaitForSeconds(.2f);
-        body.constraints = RigidbodyConstraints.None;
-        agent.isStopped = false;
+        _body.constraints = RigidbodyConstraints.None;
+        _agent.isStopped = false;
     }
-    IEnumerator NormalizedSpeed()
+
+    private IEnumerator NormalizedSpeed()
     {
         yield return new WaitForSeconds(10);
-        agent.speed = (agent.speed * 2) / 3;
-        animator.speed = (animator.speed * 2) / 3;
+        _agent.speed = (_agent.speed * 2) / 3;
+        _animator.speed = (_animator.speed * 2) / 3;
         GetComponent<PlayerMatManager>().GoRed();
     }
+    
     public void TriggerAttack()
     {
-        animator.SetTrigger("attack");
+        _animator.SetTrigger(Attack);
     }
+    
     public void StopAttacking()
     {
-        animator.ResetTrigger("attack");
+        _animator.ResetTrigger(Attack);
     }
+    
     public void LowJump()
     {
-        animator.SetTrigger("lowJump");
+        _animator.SetTrigger(Jump);
     }
+    
     public void HighJump()
     {
-        animator.SetTrigger("highJump");
+        _animator.SetTrigger(HighJumpTrigger);
     }
 }

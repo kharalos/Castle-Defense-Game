@@ -10,10 +10,10 @@ public class CoinController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.CompareTag("Player"))
         {
-            FindObjectOfType<GameManager>().IncreaseCoinAmount();
-            FindObjectOfType<AudioManager>().Play("Coin Acquired");
+            GameManager.Instance.IncreaseCoinAmount();
+            AudioManager.Instance.Play("Coin Acquired");
             Destroy(gameObject);
         }
     }

@@ -15,22 +15,27 @@ MonoBehaviour:
   version: 1
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ShieldEffect
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHABLEND_ON
+  m_Shader: {fileID: 4800000, guid: 481153b840b6e408da95e6afbe176397, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _ALPHABLEND_ON
+  - _SEGMENTED_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - SHADOWCASTER
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -94,13 +99,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - Vector1_160E9D93: 1.8
     - Vector1_198484B: 0.1
     - Vector1_D271965B: 11.58
     - _AlphaClip: 0
+    - _AmbientCol: 0
     - _Blend: 0
     - _BumpScale: 1
+    - _Clipped: 0
+    - _ColBright: 0
+    - _ColIntense: 1
     - _Cull: 2
     - _Cutoff: 0.47
     - _DetailNormalMapScale: 1
@@ -109,16 +119,27 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.605
     - _GlossyReflections: 1
+    - _Lumin: 0.24
+    - _MaxLight: 1
     - _Metallic: 1
+    - _MinLight: 0.054
     - _Mode: 2
     - _OcclusionStrength: 1
+    - _Offset: 0.21
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _Segmented: 1
+    - _ShnIntense: 0
+    - _ShnOverlap: 0
+    - _ShnRange: 0.15
+    - _ShnSmooth: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 5
+    - _Steps: 10.6
+    - _StpSmooth: 0.443
     - _Surface: 1
     - _UVSec: 0
     - _WorkflowMode: 1
@@ -128,5 +149,7 @@ Material:
     - _BaseColor: {r: 1, g: 0.92461056, b: 0.033018887, a: 0.48235294}
     - _Color: {r: 0.562436, g: 1, b: 0, a: 0.47058824}
     - _EmissionColor: {r: 0.923037, g: 1, b: 0.5518868, a: 1}
+    - _ShnColor: {r: 0, g: 0.3679245, b: 0.17147145, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

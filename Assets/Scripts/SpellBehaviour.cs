@@ -1,34 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 public enum SpellClass
 {
     spawnSpell,
     healSpell
 }
+
 public class SpellBehaviour : MonoBehaviour
 {
     public SpellClass spellClass;
     public GameObject target;
-    Vector3 randomPos;
+    
+    private Vector3 _randomPos;
     void Start()
     {
         Destroy(gameObject, 10f);
-        randomPos = new Vector3(Random.Range(-8, 8), -1, Random.Range(5, 15));
+        _randomPos = new Vector3(Random.Range(-8, 8), -1, Random.Range(5, 15));
     }
     private void Update()
     {
-        if (target)
-            transform.position = Vector3.Lerp(transform.position, target.transform.position, 5f * Time.deltaTime);
-        else transform.position = Vector3.Lerp(transform.position, randomPos, 5f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, target ? target.transform.position : _randomPos, 5f * Time.deltaTime);
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Land")
+        if (other.CompareTag("Land"))
         {
             Disperse();
         }
-        if (other.tag == "Enemy" && spellClass == SpellClass.healSpell && other.GetComponent<EnemyBehaviour>().EnemyIsAlive)
+        if (other.CompareTag("Enemy") && spellClass == SpellClass.healSpell && other.GetComponent<EnemyBehaviour>().enemyIsAlive)
         {
             other.GetComponent<EnemyBehaviour>().health += 100;
             Disperse();
@@ -39,7 +38,7 @@ public class SpellBehaviour : MonoBehaviour
         if(spellClass == SpellClass.spawnSpell)
         {
             //SpawnVFX
-            Instantiate(FindObjectOfType<GameManager>().enemies[Random.Range(0, FindObjectOfType<GameManager>().enemies.Length)], transform.position, transform.rotation);
+            Instantiate(GameManager.Instance.enemies[Random.Range(0, GameManager.Instance.enemies.Length)], transform.position, transform.rotation);
         }
         if(spellClass == SpellClass.healSpell)
         { 

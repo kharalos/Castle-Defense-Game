@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public enum EnemyClass
@@ -16,89 +17,83 @@ public enum EnemyClass
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyBehaviour : MonoBehaviour
 {
+    private static readonly int IsMinion = Animator.StringToHash("isMinion");
+    private static readonly int IsShielder = Animator.StringToHash("isShielder");
+    private static readonly int IsFighter = Animator.StringToHash("isFighter");
+    private static readonly int IsBomber = Animator.StringToHash("isBomber");
+    private static readonly int SpeedPercent = Animator.StringToHash("speedPercent");
+    private static readonly int Attack = Animator.StringToHash("attack");
+    private static readonly int InterruptTheAttack = Animator.StringToHash("interruptTheAttack");
+    private static readonly int Die = Animator.StringToHash("die");
+    private static readonly int Hurt = Animator.StringToHash("hurt");
     public EnemyClass enemyClass;
 
-    GameManager gm;
-
-    NavMeshAgent agent;
-    Vector3 castleCL;
-    Vector3 agentLoc;
-    public Vector3 destination;
+    private NavMeshAgent _agent;
+    private PlayerHeroController _hero;
+    private Vector3 _castleCl;
+    private Vector3 _agentLoc;
     public float distance;
-    Animator animator;
+    private Animator _animator;
     public float health;
-    float maxHealth;
+    private float _maxHealth;
     public Image healthBar;
-    public Image healthBarBG;
+    [FormerlySerializedAs("healthBarBG")] public Image healthBarBg;
     public Transform healthBarTransform;
-    public bool EnemyIsAlive;
+    [FormerlySerializedAs("EnemyIsAlive")] public bool enemyIsAlive;
     public bool notHit;
-    void Start()
+
+    private void Start()
     {
-        if(GameObject.Find("GameManager").GetComponent<GameManager>())
-            gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        else
-        {
-            Debug.LogError("Game Manager could not be found.");
-        }
-        health *= gm.enemyHealthMultiplier;
-        maxHealth = health;
+        health *= GameManager.Instance.enemyHealthMultiplier;
+        _maxHealth = health;
         notHit = true;
-        EnemyIsAlive = true;
-        agent = GetComponent<NavMeshAgent>();
-        agentLoc = agent.transform.position;
-        animator = GetComponent<Animator>();
-        castleCL = GameObject.FindGameObjectWithTag("Castle").GetComponent<BoxCollider>().ClosestPoint(agentLoc);
+        enemyIsAlive = true;
+        _agent = GetComponent<NavMeshAgent>();
+        _agentLoc = _agent.transform.position;
+        _animator = GetComponent<Animator>();
+        _castleCl = GameObject.FindGameObjectWithTag("Castle").GetComponent<BoxCollider>().ClosestPoint(_agentLoc);
         DetermineClass();
+        
+        _hero = FindFirstObjectByType<PlayerHeroController>();
     }
-    void DetermineClass()
+
+    private void DetermineClass()
     {
-        if (enemyClass == EnemyClass.minion || enemyClass == EnemyClass.giant)
-            animator.SetBool("isMinion", true);
-        else
-            animator.SetBool("isMinion", false);
+        _animator.SetBool(IsMinion, enemyClass is EnemyClass.minion or EnemyClass.giant);
 
-        if (enemyClass == EnemyClass.shielder)
-            animator.SetBool("isShielder", true);
-        else
-            animator.SetBool("isShielder", false);
+        _animator.SetBool(IsShielder, enemyClass == EnemyClass.shielder);
 
-        if (enemyClass == EnemyClass.fighter)
-            animator.SetBool("isFighter", true);
-        else
-            animator.SetBool("isFighter", false);
+        _animator.SetBool(IsFighter, enemyClass == EnemyClass.fighter);
 
-        if (enemyClass == EnemyClass.bomber)
-            animator.SetBool("isBomber", true);
-        else
-            animator.SetBool("isBomber", false);
+        _animator.SetBool(IsBomber, enemyClass == EnemyClass.bomber);
     }
+    
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (EnemyIsAlive) {
+        if (enemyIsAlive) {
             if (enemyClass != EnemyClass.fighter)
             {
-                if ((castleCL - agentLoc).magnitude > distance)
-                    agent.SetDestination(castleCL);
+                if ((_castleCl - _agentLoc).magnitude > distance)
+                    _agent.SetDestination(_castleCl);
                 else //Enemy is at the destination and should stop and attack
                 {
-                    agent.SetDestination(agentLoc);
+                    _agent.SetDestination(_agentLoc);
                     EnemyAttacksCastle();
                 }
             }
             else if (enemyClass == EnemyClass.fighter)
             {
-                Vector3 heroPos = FindObjectOfType<PlayerHeroController>().gameObject.transform.position;
-                if ((heroPos - agentLoc).magnitude > distance)
+                Vector3 heroPos = _hero.gameObject.transform.position;
+                if ((heroPos - _agentLoc).magnitude > distance)
                 {
-                    agent.SetDestination(heroPos);
+                    _agent.SetDestination(heroPos);
                     InterruptAttack();
                 }
 
                 else
                 {
-                    agent.SetDestination(heroPos);
+                    _agent.SetDestination(heroPos);
                     EnemyAttacksHero();
                 }
             } 
@@ -108,14 +103,12 @@ public class EnemyBehaviour : MonoBehaviour
             InterruptAttack();
         }
 
-        agentLoc = agent.transform.position;
+        _agentLoc = _agent.transform.position;
 
-        destination = agent.destination;
-
-        float speedPercent = agent.velocity.magnitude / agent.speed;
-        animator.SetFloat("speedPercent", speedPercent, .1f, Time.deltaTime);
-        healthBar.fillAmount = health/maxHealth;
-        if (health > maxHealth)
+        float speedPercent = _agent.velocity.magnitude / _agent.speed;
+        _animator.SetFloat(SpeedPercent, speedPercent, .1f, Time.deltaTime);
+        healthBar.fillAmount = health/_maxHealth;
+        if (health > _maxHealth)
             healthBar.color = Color.red;
         else
             healthBar.color = Color.green;
@@ -130,67 +123,73 @@ public class EnemyBehaviour : MonoBehaviour
         healthBarTransform.LookAt(GameObject.Find("ViewTarget").transform);
         //healthBarTransform.rotation = Quaternion.LookRotation(healthBarTransform.position - Camera.main.transform.position);
     }
-    void EnemyAttacksCastle()
+
+    private void EnemyAttacksCastle()
     {
-        animator.SetTrigger("attack");
+        _animator.SetTrigger(Attack);
     }
-    void EnemyAttacksHero()
+
+    private void EnemyAttacksHero()
     {
-        animator.SetTrigger("attack");
+        _animator.SetTrigger(Attack);
     }
-    void InterruptAttack()
+
+    private void InterruptAttack()
     {
-        animator.ResetTrigger("attack");
-        animator.SetTrigger("interruptTheAttack");
+        _animator.ResetTrigger(Attack);
+        _animator.SetTrigger(InterruptTheAttack);
     }
-    void FighterHitsHero()
+
+    private void FighterHitsHero()
     {
-        StartCoroutine(FindObjectOfType<PlayerAnimator>().HeroKnockedback(transform.position));
+        StartCoroutine(FindFirstObjectByType<PlayerAnimator>().HeroKnockedback(transform.position));
     }
-    void BomberExplodes()
+
+    private void BomberExplodes()
     {
-        if (EnemyIsAlive && !FindObjectOfType<GameManager>().shielded)
+        if (enemyIsAlive && !GameManager.Instance.shielded)
         {
-            gm.CastleHealthDecreases(50);
-            FindObjectOfType<AudioManager>().Play("Explosion");
-            FindObjectOfType<ExplosionController>().Explode(transform.position);
-            EnemyIsAlive = false;
+            GameManager.Instance.CastleHealthDecreases(50);
+            AudioManager.Instance.Play("Explosion");
+            FindFirstObjectByType<ExplosionController>().Explode(transform.position);
+            enemyIsAlive = false;
         }
         Destroy(gameObject, .2f);
     }
-    void GoblinDamagesCastle()
+
+    private void GoblinDamagesCastle()
     {
-        if (EnemyIsAlive&&!FindObjectOfType<GameManager>().shielded)
+        if (enemyIsAlive&&!GameManager.Instance.shielded)
         {
-            gm.CastleHealthDecreases(10);
-            FindObjectOfType<AudioManager>().Play("Castle Hit");
+            GameManager.Instance.CastleHealthDecreases(10);
+            AudioManager.Instance.Play("Castle Hit");
         }
     }
     public void EnemyTakesDamage(float damageValue)
     {
         health -= damageValue;
         healthBar.fillAmount = health;
-        FindObjectOfType<AudioManager>().Play("Enemy Hurts"); //You sadistic piece of shit
-        animator.SetTrigger("hurt");
-        //gm.HitStop(0.06f);
-        if (health <= 0&&EnemyIsAlive)
+        AudioManager.Instance.Play("Enemy Hurts"); //You sadistic piece of shit
+        _animator.SetTrigger(Hurt);
+        //GameManager.Instance.HitStop(0.06f);
+        if (health <= 0&&enemyIsAlive)
             EnemyDies();
     }
 
     private void EnemyDies()
     {
-        Instantiate(gm.goldCoin, new Vector3(transform.position.x, 4f, transform.position.z),Quaternion.identity);
-        EnemyIsAlive = false;
-        agent.isStopped = true;
+        Instantiate(GameManager.Instance.goldCoin, new Vector3(transform.position.x, 4f, transform.position.z),Quaternion.identity);
+        enemyIsAlive = false;
+        _agent.isStopped = true;
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
         this.gameObject.GetComponent<CapsuleCollider>().enabled = false;
-        agent.enabled = false;
-        if(enemyClass == EnemyClass.giant) FindObjectOfType<AudioManager>().Play("Giant Dies");
-        else FindObjectOfType<AudioManager>().Play("Goblin Dies");
-        gm.IncreaseSlainEnemies();
+        _agent.enabled = false;
+        if(enemyClass == EnemyClass.giant) AudioManager.Instance.Play("Giant Dies");
+        else AudioManager.Instance.Play("Goblin Dies");
+        GameManager.Instance.IncreaseSlainEnemies();
         //dead animation
-        animator.SetTrigger("die");
+        _animator.SetTrigger(Die);
         Destroy(this.gameObject, 3f);
-        healthBarBG.CrossFadeAlpha(0, .15f, false);
+        healthBarBg.CrossFadeAlpha(0, .15f, false);
     }
 }

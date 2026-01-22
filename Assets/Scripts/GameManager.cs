@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
     [Header("Main Values")]
     public float health;
     public int coin;
@@ -22,7 +25,8 @@ public class GameManager : MonoBehaviour
     public GameObject shields;
 
     public int heroDamageMultiplier;
-    public int archerDamageMultiplier;
+    public float[] archerSpeedMultiplier = {1, 1, 1};
+    public int[] archerDamageMultiplier = {1, 1, 1};
     public float enemyHealthMultiplier;
 
     public int selectedEnemy;// 0 is for goblin, change it for difficulty
@@ -37,6 +41,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private AdsManager adm;
 
+    private void Awake()
+    {
+        Instance = this;
+        archerSpeedMultiplier = new[] {1f, 1f, 1f};
+        archerDamageMultiplier = new[] {1, 1, 1};
+    }
+
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -48,7 +59,7 @@ public class GameManager : MonoBehaviour
         selectedEnemy = 0;
         numOfEnemies = 0;
         slainEnemies = 0;
-        FindObjectOfType<AudioManager>().Play("Theme Music");
+        AudioManager.Instance.Play("Theme Music");
         recordedIntervalTime = spawnIntervalTime;
         StartCoroutine(SpawnIntervals(spawnIntervalTime, selectedEnemy));
         StartCoroutine(PowerupIntervals());
@@ -188,14 +199,22 @@ public class GameManager : MonoBehaviour
     {
         archers[number].SetActive(true);
     }
+    
+    public void ActivateFastenArcher(int number)
+    {
+        archerSpeedMultiplier[number] += 0.5f;
+    }
+    
+    public void ActivateDamageArcher(int number)
+    {
+        archerDamageMultiplier[number] *= 2;
+    }
+    
     public void IncreaseDamage(int increasedValue)
     {
         heroDamageMultiplier += increasedValue;
     }
-    public void IncreaseArchersDamage(int increasedValue)
-    {
-        archerDamageMultiplier += increasedValue;
-    }
+
     public void Shielded(int time)
     {
         StartCoroutine(Unshield(time));
@@ -207,7 +226,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         shielded = false;
         shields.SetActive(false);
-        FindObjectOfType<PlayerMatManager>().GoRed();
+        FindFirstObjectByType<PlayerMatManager>().GoRed();
     }
 
     public void IncreaseSlainEnemies()
@@ -218,7 +237,7 @@ public class GameManager : MonoBehaviour
     {
         deathMenuIsOn = true;
         //open the menu
-        FindObjectOfType<UIManager>().OpenDeathMenu();
+        FindFirstObjectByType<UIManager>().OpenDeathMenu();
         Time.timeScale = 0f;
         //Debug.LogError("You are defeated");
     }

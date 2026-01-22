@@ -6,6 +6,8 @@ public class ArrowBehaviour : MonoBehaviour
 {
     bool struck;
     public GameObject target;
+    public float destroyDelay = 2f;
+    public int archerIndex;
     void Start()
     {
         Destroy(gameObject, 15f);
@@ -18,24 +20,25 @@ public class ArrowBehaviour : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Land")
+        if (other.CompareTag("Land"))
         {
             FreezeArrow();
             transform.position += transform.up * 0.05f;
         }
-        if (other.tag == "Enemy" && !struck)
+        if (other.CompareTag("Enemy") && !struck)
         {
-            other.GetComponent<EnemyBehaviour>().EnemyTakesDamage(50*FindObjectOfType<GameManager>().archerDamageMultiplier);
-            FindObjectOfType<AudioManager>().Play("Arrow Pierces");
+            other.GetComponent<EnemyBehaviour>().EnemyTakesDamage(50 * GameManager.Instance.archerDamageMultiplier[archerIndex]);
+            AudioManager.Instance.Play("Arrow Pierces");
             transform.parent = other.transform;
             FreezeArrow();
         }
     }
+    
     void FreezeArrow()
     {
         struck = true;
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-        FindObjectOfType<AudioManager>().Play("Arrow Hit");
-        Destroy(gameObject, 6f);
+        AudioManager.Instance.Play("Arrow Hit");
+        Destroy(gameObject, destroyDelay);
     }
 }

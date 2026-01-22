@@ -10,7 +10,7 @@ public class ShopController : MonoBehaviour
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
-        gm = FindObjectOfType<GameManager>();
+        gm = GameManager.Instance;
     }
     public void SlideLeft()
     {

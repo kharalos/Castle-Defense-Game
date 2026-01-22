@@ -12,8 +12,6 @@ public class QueenBehaviour : MonoBehaviour
     Animator anim;
     public GameObject leftSpell, rightSpell, leftSpellPreFab, rightSpellPreFab;
     public ParticleSystem castSpellPS;
-    GameObject[] enemies;
-    GameObject closestEnemy;
     public float intervalTime;
     Coroutine interval;
     // Start is called before the first frame update
@@ -26,10 +24,7 @@ public class QueenBehaviour : MonoBehaviour
         targetPos = battlePos;
         interval = StartCoroutine(IntervalRoutine());
     }
-    void Update()
-    {
-        FindClosestEnemy();
-    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -62,27 +57,30 @@ public class QueenBehaviour : MonoBehaviour
     {
         body.MovePosition(body.position + ((targetPosition - body.position) * 2 * Time.deltaTime));
     }
-    void FindClosestEnemy()
+    
+    GameObject FindClosestEnemy()
     {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
         float distanceToClosestEnemy = Mathf.Infinity;
-        closestEnemy = null;
+        GameObject closestEnemy = null;
         foreach (GameObject enemy in enemies)
         {
             float distance = (enemy.transform.position - transform.position).sqrMagnitude;
-            if (distance < distanceToClosestEnemy && enemy.GetComponent<EnemyBehaviour>().EnemyIsAlive)
+            if (distance < distanceToClosestEnemy && enemy.GetComponent<EnemyBehaviour>().enemyIsAlive)
             {
                 distanceToClosestEnemy = distance;
                 closestEnemy = enemy;
             }
         }
+
+        return closestEnemy;
     }
 
 
     void HealSpellThrow()
     {
         GameObject spellIns = Instantiate(rightSpellPreFab, rightSpell.transform.position, Quaternion.identity);
-        spellIns.GetComponent<SpellBehaviour>().target = closestEnemy;
+        spellIns.GetComponent<SpellBehaviour>().target = FindClosestEnemy();
         rightSpell.SetActive(false);
         StartCoroutine(TimerRecast());
     }

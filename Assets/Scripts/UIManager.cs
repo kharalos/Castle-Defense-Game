@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     public GameObject deathMenu;
     public Toggle musicToggle;
     public Button archer1, archer2, archer3, damageButton;
+    public Button archerFasten1, archerFasten2, archerFasten3;
+    public Button archerDamage1, archerDamage2, archerDamage3;
     bool archer1bought, archer2bought, archer3bought;
     void Start()
     {
@@ -29,8 +31,8 @@ public class UIManager : MonoBehaviour
     {
         castleHealthBar.fillAmount = gm.health / 100;
         castleHealthText.text = gm.health.ToString();
-        enemyNumber.text = FindObjectOfType<GameManager>().slainEnemies.ToString();
-        coinNumber.text = FindObjectOfType<GameManager>().coin.ToString();
+        enemyNumber.text = GameManager.Instance.slainEnemies.ToString();
+        coinNumber.text = GameManager.Instance.coin.ToString();
 
         ArcherButtons();
         if (gm.coin >= 30)
@@ -40,22 +42,14 @@ public class UIManager : MonoBehaviour
         else
             damageButton.interactable = false;
     }
+    
     void ArcherButtons()
     {
         if (gm.coin >= 20)
         {
-            if (!archer1bought)
-                archer1.interactable = true;
-            else
-                archer1.interactable = false;
-            if (!archer2bought)
-                archer2.interactable = true;
-            else
-                archer2.interactable = false;
-            if (!archer3bought)
-                archer3.interactable = true;
-            else
-                archer3.interactable = false;
+            archer1.interactable = !archer1bought;
+            archer2.interactable = !archer2bought;
+            archer3.interactable = !archer3bought;
         }
         else
         {
@@ -63,10 +57,48 @@ public class UIManager : MonoBehaviour
             archer2.interactable = false;
             archer3.interactable = false;
         }
+        
+        archer1.gameObject.SetActive(!archer1bought);
+        archer2.gameObject.SetActive(!archer2bought);
+        archer3.gameObject.SetActive(!archer3bought);
+        
+        archerFasten1.gameObject.SetActive(archer1bought);
+        archerFasten2.gameObject.SetActive(archer2bought);
+        archerFasten3.gameObject.SetActive(archer3bought);
+        
+        archerDamage1.gameObject.SetActive(archer1bought);
+        archerDamage2.gameObject.SetActive(archer2bought);
+        archerDamage3.gameObject.SetActive(archer3bought);
+
+        if (gm.coin >= 40)
+        {
+            archerFasten1.interactable = archer1bought;
+            archerFasten2.interactable = archer2bought;
+            archerFasten3.interactable = archer3bought;
+        }
+        else
+        {
+            archerFasten1.interactable = false;
+            archerFasten2.interactable = false;
+            archerFasten3.interactable = false;
+        }
+        
+        if (gm.coin >= 50)
+        {
+            archerDamage1.interactable = archer1bought;
+            archerDamage2.interactable = archer2bought;
+            archerDamage3.interactable = archer3bought;
+        }
+        else
+        {
+            archerDamage1.interactable = false;
+            archerDamage2.interactable = false;
+            archerDamage3.interactable = false;
+        }
     }
     public void MusicToggle()
     {
-        FindObjectOfType<AudioManager>().Mute("Theme Music");
+        AudioManager.Instance.Mute("Theme Music");
     }
     public void OpenDeathMenu()
     {
@@ -76,23 +108,37 @@ public class UIManager : MonoBehaviour
     {
         gm.ChangeCoinAmount(-20);
         gm.ActivateArcher(0);
-        FindObjectOfType<AudioManager>().Play("Buy Sound");
+        AudioManager.Instance.Play("Buy Sound");
         archer1bought = true;
     }
     public void ArcherButton2()
     {
         gm.ChangeCoinAmount(-20);
         gm.ActivateArcher(1);
-        FindObjectOfType<AudioManager>().Play("Buy Sound");
+        AudioManager.Instance.Play("Buy Sound");
         archer2bought = true;
     }
     public void ArcherButton3()
     {
         gm.ChangeCoinAmount(-20);
         gm.ActivateArcher(2);
-        FindObjectOfType<AudioManager>().Play("Buy Sound");
+        AudioManager.Instance.Play("Buy Sound");
         archer3bought = true;
     }
+    public void ArcherFastenButton(int archerIndex)
+    {
+        gm.ChangeCoinAmount(-40);
+        gm.ActivateFastenArcher(archerIndex);
+        AudioManager.Instance.Play("Buy Sound");
+    }
+    
+    public void ArcherDamageButton(int archerIndex)
+    {
+        gm.ChangeCoinAmount(-50);
+        gm.ActivateDamageArcher(archerIndex);
+        AudioManager.Instance.Play("Buy Sound");
+    }
+    
     public void DamageButton()
     {
         gm.IncreaseDamage(1);

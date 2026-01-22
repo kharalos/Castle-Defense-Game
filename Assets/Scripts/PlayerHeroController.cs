@@ -23,7 +23,7 @@ public class PlayerHeroController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0)&&!FindObjectOfType<GameManager>().paused)
+        if (Input.GetMouseButton(0)&&!GameManager.Instance.paused)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -34,7 +34,7 @@ public class PlayerHeroController : MonoBehaviour
                 animator.MoveToPoint(hit.point,true);
             }
         }
-        if (Input.GetMouseButtonUp(0) && !FindObjectOfType<GameManager>().paused)
+        if (Input.GetMouseButtonUp(0) && !GameManager.Instance.paused)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -49,7 +49,7 @@ public class PlayerHeroController : MonoBehaviour
     void HeroSwings()
     {
         attackNearby = true;
-        FindObjectOfType<AudioManager>().Play("Hero Swings");
+        AudioManager.Instance.Play("Hero Swings");
     }
     void SwingStopped()
     {
@@ -61,42 +61,42 @@ public class PlayerHeroController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Haste")
+        if(other.CompareTag("Haste"))
         {
             GetComponent<PlayerMatManager>().GoBlue();
-            FindObjectOfType<AudioManager>().Play("Hero Hastened");
+            AudioManager.Instance.Play("Hero Hastened");
             animator.Hastened();
             hastenedEffect.Play();
             Destroy(other.gameObject);
         }
-        if (other.tag == "Force")
+        /*if (other.CompareTag("Force"))
         {
-            FindObjectOfType<AudioManager>().Play("Hero Gained Force");
+            AudioManager.Instance.Play("Hero Gained Force");
             Destroy(other.gameObject);
-        }
-        if (other.tag == "Shield")
+        }*/
+        if (other.CompareTag("Shield"))
         {
             GetComponent<PlayerMatManager>().GoYellow();
-            FindObjectOfType<GameManager>().Shielded(10);
+            GameManager.Instance.Shielded(10);
             Destroy(other.gameObject);
         }
-        if (other.tag == "Health")
+        if (other.CompareTag("Health"))
         {
-            FindObjectOfType<AudioManager>().Play("Health Restored");
-            FindObjectOfType<GameManager>().CastleHealthDecreases(-20);
+            AudioManager.Instance.Play("Health Restored");
+            GameManager.Instance.CastleHealthDecreases(-20);
             healedEffect.Play();
             Destroy(other.gameObject);
         }
-        if (other.tag == "Star")
+        /*if (other.CompareTag("Star"))
         {
             GetComponent<PlayerMatManager>().GoCrazy();
             Destroy(other.gameObject);
-        }
+        }*/
     }
     //if enemy on range attack also if idle
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.CompareTag("Enemy"))
         {
             //if idle state then enter state attacking then target the enemy
             animator.TriggerAttack();
@@ -104,11 +104,11 @@ public class PlayerHeroController : MonoBehaviour
             //enemy loses hp
             if (attackNearby && other.GetComponent<EnemyBehaviour>().notHit)
             {
-                other.GetComponent<EnemyBehaviour>().EnemyTakesDamage(50*FindObjectOfType<GameManager>().heroDamageMultiplier);
-                FindObjectOfType<AudioManager>().Play("Hero Slashes");
+                other.GetComponent<EnemyBehaviour>().EnemyTakesDamage(50*GameManager.Instance.heroDamageMultiplier);
+                AudioManager.Instance.Play("Hero Slashes");
                 other.GetComponent<EnemyBehaviour>().notHit = false;
             }
-            if (!other.GetComponent<EnemyBehaviour>().EnemyIsAlive)
+            if (!other.GetComponent<EnemyBehaviour>().enemyIsAlive)
                 animator.StopAttacking();
 
             //if has special ability not on cooldown use it
@@ -116,7 +116,7 @@ public class PlayerHeroController : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.CompareTag("Enemy"))
         {
             animator.StopAttacking();
         }
