@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -24,6 +22,7 @@ public class GameManager : MonoBehaviour
     public bool shielded;
 
     public GameObject shields;
+    public Transform viewTarget;
 
     public int heroDamageMultiplier;
     public float[] archerSpeedMultiplier = {1, 1, 1};
@@ -33,18 +32,15 @@ public class GameManager : MonoBehaviour
     public float jumpDropCooldownTime = 5f;
 
     public int selectedEnemy;// 0 is for goblin, change it for difficulty
-    [SerializeField]
-    int numOfEnemies;
+    [SerializeField] private int numOfEnemies;
     public int slainEnemies;
 
     bool deathMenuIsOn = false;
 
     float recordedIntervalTime;
-    public GameObject theQueen;
+    public QueenBehaviour theQueen;
     
     private float _startingAttackRange;
-
-    [SerializeField] private AdsManager adm;
 
     private void Awake()
     {
@@ -56,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = 60;
+        // Application.targetFrameRate = 60;
         coin = 0;
         phase = 1;
         Screen.orientation = ScreenOrientation.Portrait;
@@ -72,31 +68,21 @@ public class GameManager : MonoBehaviour
         StartCoroutine(PowerUpIntervals());
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdatePhase()
     {
-        if (health <= 0 && !deathMenuIsOn)
+        phase = numOfEnemies switch
         {
-            CastleIsDestroyed();
-        }
-        if (numOfEnemies >= 0 && numOfEnemies <= 20)
-            phase = 1;
-        else if (numOfEnemies > 20 && numOfEnemies <= 40)
-        {
-            phase = 2;
-        }
-        else if (numOfEnemies > 40 && numOfEnemies <= 60)
-        {
-            phase = 3;
-        }
-        else if (numOfEnemies > 60 && numOfEnemies <= 80)
-        {
-            phase = 4;
-        }
-        else if (numOfEnemies > 80 && numOfEnemies <= 80)
-            phase = 5;
-        else if (numOfEnemies > 120)
-            phase = 7;
+            >= 0 and <= 20 => 1,
+            > 20 and <= 40 => 2,
+            > 40 and <= 60 => 3,
+            > 60 and <= 80 => 4,
+            > 80 and <= 100 => 5,
+            > 100 and <= 120 => 6,
+            > 120 and <= 200 => 7,
+            > 200  and <= 1000 => 8,
+            > 1000 => 9,
+            _ => phase
+        };
 
         //Phase system
         switch (phase)
@@ -159,9 +145,19 @@ public class GameManager : MonoBehaviour
             case 7:
                 spawnIntervalTime = 1.2f;
                 theQueen.SetActive(true);
-                // She has come.
+                // She has arrived.
                 break;
 
+            case 8:
+                var inverseLerp = Mathf.InverseLerp(200f, 1000f, numOfEnemies);
+                spawnIntervalTime = Mathf.Lerp(1f, 0.2f, inverseLerp);
+                theQueen.SetSpeed(Mathf.Lerp(1f, 2f, inverseLerp));
+                break;
+            case 9:
+                inverseLerp = Mathf.InverseLerp(1000f, 2600f, numOfEnemies);
+                spawnIntervalTime = Mathf.Lerp(0.2f, 0.1f, inverseLerp);
+                theQueen.SetSpeed(Mathf.Lerp(2f, 6f, inverseLerp));
+                break;
         }
     }
 
@@ -184,12 +180,19 @@ public class GameManager : MonoBehaviour
             numOfEnemies++;
             fatedNumber = Random.Range(0, 101);
             yield return new WaitForSeconds(spawnIntervalTime);
+            UpdatePhase();
         }
     }
     
     public void CastleHealthDecreases(int valueChanged)
     {
         health -= valueChanged;
+        UIManager.Instance.SetHealth(health);
+        
+        if (health <= 0 && !deathMenuIsOn)
+        {
+            CastleIsDestroyed();
+        }
     }
     public void Pause()
     {
@@ -204,10 +207,12 @@ public class GameManager : MonoBehaviour
     public void IncreaseCoinAmount(int coinAmount)
     {
         coin += coinAmount;
+        UIManager.Instance.SetCoin(coin);
     }
     public void ChangeCoinAmount(int change)
     {
         coin += change;
+        UIManager.Instance.SetCoin(coin);
     }
     public void ActivateArcher(int number)
     {
@@ -237,7 +242,7 @@ public class GameManager : MonoBehaviour
     
     public void StartJumpCooldown()
     {
-        FindFirstObjectByType<UIManager>().StartJumpCooldown(jumpDropCooldownTime);
+        UIManager.Instance.StartJumpCooldown(jumpDropCooldownTime);
     }
     
     public void Shielded(int time)
@@ -257,12 +262,19 @@ public class GameManager : MonoBehaviour
     public void IncreaseSlainEnemies()
     {
         slainEnemies++;
+        UIManager.Instance.SetEnemyNumber(slainEnemies);
     }
+    
+    public void UpdateShopItems()
+    {
+        UIManager.Instance.UpdateButtons(coin);
+    }
+    
     void CastleIsDestroyed()
     {
         deathMenuIsOn = true;
         //open the menu
-        FindFirstObjectByType<UIManager>().OpenDeathMenu();
+        UIManager.Instance.OpenDeathMenu();
         Time.timeScale = 0f;
         //Debug.LogError("You are defeated");
     }
@@ -288,6 +300,4 @@ public class GameManager : MonoBehaviour
         waiting = false;
     }
     #endregion
-
-
 }

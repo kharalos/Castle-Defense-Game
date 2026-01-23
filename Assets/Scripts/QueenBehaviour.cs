@@ -1,10 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
 public class QueenBehaviour : MonoBehaviour
 {
+    private static readonly int Speed = Animator.StringToHash("Speed");
     public enum States { idle, combat, defeated}
     public States states;
     Vector3 battlePos, defeatPos, oldPos, targetPos;
@@ -110,5 +110,15 @@ public class QueenBehaviour : MonoBehaviour
         yield return new WaitForSeconds(1);
         leftSpell.SetActive(true);
         rightSpell.SetActive(true);
+    }
+
+    public void SetSpeed(float speed)
+    {
+        anim.SetFloat(Speed, speed);
+    }
+
+    public void SetActive(bool state)
+    {
+        if(gameObject.activeSelf != state) gameObject.SetActive(state);
     }
 }

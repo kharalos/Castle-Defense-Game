@@ -27,7 +27,7 @@ public class SpellBehaviour : MonoBehaviour
         {
             Disperse();
         }
-        if (other.CompareTag("Enemy") && spellClass == SpellClass.healSpell && other.GetComponent<EnemyBehaviour>().enemyIsAlive)
+        else if (other.CompareTag("Enemy") && spellClass == SpellClass.healSpell && other.GetComponent<EnemyBehaviour>().enemyIsAlive)
         {
             other.GetComponent<EnemyBehaviour>().health += 100;
             Disperse();

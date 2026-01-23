@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class ExplosionController : MonoBehaviour
 {
-    ParticleSystem ps;
-    void Start()
+    private ParticleSystem _ps;
+
+    private void Start()
     {
-        ps = gameObject.GetComponent<ParticleSystem>();
+        _ps = gameObject.GetComponent<ParticleSystem>();
     }
 
     public void Explode(Vector3 pos)
     {
-        ps.Stop();
+        _ps.Stop();
         transform.position = pos;
-        ps.Play();
+        _ps.Play();
     }
 }

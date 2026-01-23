@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.038937338, g: 0.041681495, b: 0.047169805, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -28,16 +28,16 @@ RenderSettings:
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
-  m_FlareStrength: 1
+  m_FlareStrength: 0
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
-  m_DefaultReflectionMode: 0
+  m_DefaultReflectionMode: 1
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 1
+  m_ReflectionIntensity: 0
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 481290959}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -93,8 +93,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: db515ba6140ac554d9ae858ff6e84556, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: cb5ab0262b414c54d8d7e537b9629dfa, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -7166,6 +7166,7 @@ GameObject:
   - component: {fileID: 394931516}
   - component: {fileID: 394931515}
   - component: {fileID: 394931514}
+  - component: {fileID: 394931517}
   m_Layer: 5
   m_Name: ArcherFastenButton1
   m_TagString: Untagged
@@ -7239,19 +7240,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1867546803}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 963517569}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ArcherFastenButton
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &394931515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7290,6 +7279,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394931512}
   m_CullTransparentMesh: 1
+--- !u!114 &394931517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394931512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b381d95074be2a3adb33ac9e6daca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  costText: {fileID: 1723982804}
+  button: {fileID: 394931514}
 --- !u!1 &412885210
 GameObject:
   m_ObjectHideFlags: 0
@@ -8688,85 +8691,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10.000002, y: 1, z: 10.000002}
   m_Center: {x: -0.00000035762787, y: -0.5, z: -5.456968e-12}
---- !u!1 &675591566
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 675591567}
-  - component: {fileID: 675591569}
-  - component: {fileID: 675591568}
-  m_Layer: 5
-  m_Name: ShowAds
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &675591567
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 675591566}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1894522789}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &675591568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 675591566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Show Ad
---- !u!222 &675591569
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 675591566}
-  m_CullTransparentMesh: 1
 --- !u!1 &696112351
 GameObject:
   m_ObjectHideFlags: 0
@@ -8779,6 +8703,7 @@ GameObject:
   - component: {fileID: 696112355}
   - component: {fileID: 696112354}
   - component: {fileID: 696112353}
+  - component: {fileID: 696112356}
   m_Layer: 5
   m_Name: ArcherFastenButton3
   m_TagString: Untagged
@@ -8852,19 +8777,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 463946394}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 963517569}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ArcherFastenButton
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &696112354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8903,6 +8816,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 696112351}
   m_CullTransparentMesh: 1
+--- !u!114 &696112356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696112351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b381d95074be2a3adb33ac9e6daca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  costText: {fileID: 104084378}
+  button: {fileID: 696112353}
 --- !u!1 &773182696
 GameObject:
   m_ObjectHideFlags: 0
@@ -8990,6 +8917,7 @@ GameObject:
   - component: {fileID: 775866978}
   - component: {fileID: 775866977}
   - component: {fileID: 775866979}
+  - component: {fileID: 775866980}
   m_Layer: 5
   m_Name: ArcherButton2
   m_TagString: Untagged
@@ -9099,19 +9027,21 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2081972414}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 963517569}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ArcherButton2
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &775866980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775866975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b381d95074be2a3adb33ac9e6daca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  costText: {fileID: 49418280}
+  button: {fileID: 775866979}
 --- !u!1 &814624001
 GameObject:
   m_ObjectHideFlags: 0
@@ -9159,6 +9089,7 @@ GameObject:
   - component: {fileID: 819823049}
   - component: {fileID: 819823048}
   - component: {fileID: 819823047}
+  - component: {fileID: 819823050}
   m_Layer: 5
   m_Name: ArcherDamageButton2
   m_TagString: Untagged
@@ -9232,19 +9163,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 388784542}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 963517569}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ArcherDamageButton
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &819823048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9283,6 +9202,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 819823045}
   m_CullTransparentMesh: 1
+--- !u!114 &819823050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819823045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b381d95074be2a3adb33ac9e6daca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  costText: {fileID: 134336125}
+  button: {fileID: 819823047}
 --- !u!1 &825006927
 GameObject:
   m_ObjectHideFlags: 0
@@ -9631,6 +9564,7 @@ GameObject:
   - component: {fileID: 855380567}
   - component: {fileID: 855380566}
   - component: {fileID: 855380565}
+  - component: {fileID: 855380568}
   m_Layer: 5
   m_Name: ArcherFastenButton2
   m_TagString: Untagged
@@ -9704,19 +9638,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 636512974}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 963517569}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ArcherFastenButton
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &855380566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9755,6 +9677,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 855380563}
   m_CullTransparentMesh: 1
+--- !u!114 &855380568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855380563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b381d95074be2a3adb33ac9e6daca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  costText: {fileID: 1164169911}
+  button: {fileID: 855380565}
 --- !u!1 &858021210
 GameObject:
   m_ObjectHideFlags: 0
@@ -10280,6 +10216,7 @@ GameObject:
   - component: {fileID: 925643777}
   - component: {fileID: 925643776}
   - component: {fileID: 925643775}
+  - component: {fileID: 925643778}
   m_Layer: 5
   m_Name: JumpButton
   m_TagString: Untagged
@@ -10402,6 +10339,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 925643773}
   m_CullTransparentMesh: 0
+--- !u!114 &925643778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925643773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b381d95074be2a3adb33ac9e6daca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  costText: {fileID: 0}
+  button: {fileID: 925643775}
 --- !u!1 &945587631
 GameObject:
   m_ObjectHideFlags: 0
@@ -10544,7 +10495,6 @@ RectTransform:
   - {fileID: 120706604}
   - {fileID: 70625460}
   - {fileID: 508757328}
-  - {fileID: 1894522789}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -10564,25 +10514,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b73d287cee818e249a93992bda810c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopData: {fileID: 11400000, guid: f18d1e747a254be44ba3904ba498b3de, type: 2}
   castleHealthBar: {fileID: 412885212}
   jumpFiller: {fileID: 80114496}
   castleHealthText: {fileID: 1421435709}
   enemyNumber: {fileID: 302361782}
   coinNumber: {fileID: 591630059}
   deathMenu: {fileID: 508757327}
-  musicToggle: {fileID: 1405064267}
-  archer1: {fileID: 1337410744}
-  archer2: {fileID: 775866979}
-  archer3: {fileID: 1188824690}
-  damageButton: {fileID: 1066834056}
-  rangeButton: {fileID: 969021044}
-  jumpButton: {fileID: 925643775}
-  archerFasten1: {fileID: 394931514}
-  archerFasten2: {fileID: 855380565}
-  archerFasten3: {fileID: 696112353}
-  archerDamage1: {fileID: 1044124930}
-  archerDamage2: {fileID: 819823047}
-  archerDamage3: {fileID: 1680230401}
+  archer1: {fileID: 1337410747}
+  archer2: {fileID: 775866980}
+  archer3: {fileID: 1188824693}
+  damageButton: {fileID: 1066834059}
+  rangeButton: {fileID: 969021047}
+  jumpButton: {fileID: 925643778}
+  archerFasten1: {fileID: 394931517}
+  archerFasten2: {fileID: 855380568}
+  archerFasten3: {fileID: 696112356}
+  archerDamage1: {fileID: 1044124933}
+  archerDamage2: {fileID: 819823050}
+  archerDamage3: {fileID: 1680230404}
 --- !u!1 &969021042
 GameObject:
   m_ObjectHideFlags: 0
@@ -10595,6 +10545,7 @@ GameObject:
   - component: {fileID: 969021046}
   - component: {fileID: 969021045}
   - component: {fileID: 969021044}
+  - component: {fileID: 969021047}
   m_Layer: 5
   m_Name: ExtraRangeButton
   m_TagString: Untagged
@@ -10666,19 +10617,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1883734439}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 963517569}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: RangeButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &969021045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10717,6 +10656,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969021042}
   m_CullTransparentMesh: 1
+--- !u!114 &969021047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969021042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b381d95074be2a3adb33ac9e6daca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  costText: {fileID: 2139324527}
+  button: {fileID: 969021044}
 --- !u!1 &1015675884
 GameObject:
   m_ObjectHideFlags: 0
@@ -10787,8 +10740,8 @@ Camera:
   m_TargetTexture: {fileID: 8400000, guid: 1c1911d92c0787f498d29d04ae4baa2c, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
-  m_AllowMSAA: 0
+  m_HDR: 1
+  m_AllowMSAA: 1
   m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -10936,6 +10889,7 @@ GameObject:
   - component: {fileID: 1044124932}
   - component: {fileID: 1044124931}
   - component: {fileID: 1044124930}
+  - component: {fileID: 1044124933}
   m_Layer: 5
   m_Name: ArcherDamageButton1
   m_TagString: Untagged
@@ -11009,19 +10963,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1777671237}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 963517569}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ArcherDamageButton
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1044124931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11060,6 +11002,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044124928}
   m_CullTransparentMesh: 1
+--- !u!114 &1044124933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044124928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b381d95074be2a3adb33ac9e6daca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  costText: {fileID: 864948894}
+  button: {fileID: 1044124930}
 --- !u!1 &1057871604
 GameObject:
   m_ObjectHideFlags: 0
@@ -11140,6 +11096,7 @@ GameObject:
   - component: {fileID: 1066834058}
   - component: {fileID: 1066834057}
   - component: {fileID: 1066834056}
+  - component: {fileID: 1066834059}
   m_Layer: 5
   m_Name: ExtraDamageButton
   m_TagString: Untagged
@@ -11211,19 +11168,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2109234981}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 963517569}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: DamageButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1066834057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11262,6 +11207,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066834054}
   m_CullTransparentMesh: 1
+--- !u!114 &1066834059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066834054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b381d95074be2a3adb33ac9e6daca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  costText: {fileID: 2082196364}
+  button: {fileID: 1066834056}
 --- !u!1 &1149843139
 GameObject:
   m_ObjectHideFlags: 0
@@ -11599,6 +11558,7 @@ GameObject:
   - component: {fileID: 1188824692}
   - component: {fileID: 1188824691}
   - component: {fileID: 1188824690}
+  - component: {fileID: 1188824693}
   m_Layer: 5
   m_Name: ArcherButton3
   m_TagString: Untagged
@@ -11670,19 +11630,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 321481350}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 963517569}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ArcherButton3
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1188824691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11721,6 +11669,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1188824688}
   m_CullTransparentMesh: 1
+--- !u!114 &1188824693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188824688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b381d95074be2a3adb33ac9e6daca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  costText: {fileID: 308610120}
+  button: {fileID: 1188824690}
 --- !u!1 &1188994527
 GameObject:
   m_ObjectHideFlags: 0
@@ -12250,6 +12212,7 @@ GameObject:
   - component: {fileID: 1337410746}
   - component: {fileID: 1337410745}
   - component: {fileID: 1337410744}
+  - component: {fileID: 1337410747}
   m_Layer: 5
   m_Name: ArcherButton1
   m_TagString: Untagged
@@ -12321,19 +12284,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1929786238}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 963517569}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ArcherButton1
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1337410745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12372,6 +12323,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337410742}
   m_CullTransparentMesh: 1
+--- !u!114 &1337410747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337410742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b381d95074be2a3adb33ac9e6daca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  costText: {fileID: 579406240}
+  button: {fileID: 1337410744}
 --- !u!1 &1394511722
 GameObject:
   m_ObjectHideFlags: 0
@@ -14099,6 +14064,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 647591479a3d869459696528ed9a00ef, type: 3}
+--- !u!114 &1494886595 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8386295251123828297, guid: 647591479a3d869459696528ed9a00ef, type: 3}
+  m_PrefabInstance: {fileID: 1494886594}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d353cbd296d37f249bab59e6206d8c87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1524610680 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1725901038151738555, guid: 32941578c1288694696de3c395b399c6, type: 3}
@@ -14402,6 +14378,7 @@ GameObject:
   - component: {fileID: 1680230403}
   - component: {fileID: 1680230402}
   - component: {fileID: 1680230401}
+  - component: {fileID: 1680230404}
   m_Layer: 5
   m_Name: ArcherDamageButton3
   m_TagString: Untagged
@@ -14475,19 +14452,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2016418630}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 963517569}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ArcherDamageButton
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1680230402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14526,6 +14491,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1680230399}
   m_CullTransparentMesh: 1
+--- !u!114 &1680230404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680230399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 794b381d95074be2a3adb33ac9e6daca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  costText: {fileID: 1483881266}
+  button: {fileID: 1680230401}
 --- !u!1 &1696835354
 GameObject:
   m_ObjectHideFlags: 0
@@ -15426,139 +15405,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883734437}
   m_CullTransparentMesh: 1
---- !u!1 &1894522788
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1894522789}
-  - component: {fileID: 1894522792}
-  - component: {fileID: 1894522791}
-  - component: {fileID: 1894522790}
-  m_Layer: 5
-  m_Name: Show Ad Test Button
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1894522789
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894522788}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 675591567}
-  m_Father: {fileID: 963517568}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -141.58, y: -429.86}
-  m_SizeDelta: {x: 160, y: 29.28}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1894522790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894522788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1894522791}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2021862788}
-        m_TargetAssemblyTypeName: AdsManager, Assembly-CSharp
-        m_MethodName: ShowAd
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1894522791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894522788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1894522792
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894522788}
-  m_CullTransparentMesh: 1
 --- !u!1 &1929786236
 GameObject:
   m_ObjectHideFlags: 0
@@ -15703,11 +15549,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32941578c1288694696de3c395b399c6, type: 3}
---- !u!1 &1973102730 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8692917912916777020, guid: 647591479a3d869459696528ed9a00ef, type: 3}
-  m_PrefabInstance: {fileID: 1494886594}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2016418628
 GameObject:
   m_ObjectHideFlags: 0
@@ -15793,7 +15634,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2021862787}
   - component: {fileID: 2021862786}
-  - component: {fileID: 2021862788}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -15841,6 +15681,7 @@ MonoBehaviour:
   enemyTargeting: 1
   shielded: 0
   shields: {fileID: 1222884428}
+  viewTarget: {fileID: 1327348127}
   heroDamageMultiplier: 1
   archerSpeedMultiplier: []
   archerDamageMultiplier: 
@@ -15849,8 +15690,7 @@ MonoBehaviour:
   selectedEnemy: 0
   numOfEnemies: 0
   slainEnemies: 0
-  theQueen: {fileID: 1973102730}
-  adm: {fileID: 2021862788}
+  theQueen: {fileID: 1494886595}
 --- !u!4 &2021862787
 Transform:
   m_ObjectHideFlags: 0
@@ -15870,21 +15710,6 @@ Transform:
   - {fileID: 481290958}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2021862788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2021862785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 123d995d432ed5e4181e054cf83a0c35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _testMode: 1
-  _androidAdUnitId: Interstitial_Android
-  _iOsAdUnitId: Interstitial_iOS
 --- !u!1 &2081972412
 GameObject:
   m_ObjectHideFlags: 0

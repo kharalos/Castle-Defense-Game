@@ -55,6 +55,9 @@ public class EnemyBehaviour : MonoBehaviour
         DetermineClass();
         
         _hero = FindFirstObjectByType<PlayerHeroController>();
+        
+        healthBar.fillAmount = health/_maxHealth;
+        healthBar.color = health > _maxHealth ? Color.red : Color.green;
     }
 
     private void DetermineClass()
@@ -71,7 +74,8 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (enemyIsAlive) {
+        if (enemyIsAlive) 
+        {
             if (enemyClass != EnemyClass.fighter)
             {
                 if ((_castleCl - _agentLoc).magnitude > distance)
@@ -98,30 +102,16 @@ public class EnemyBehaviour : MonoBehaviour
                 }
             } 
         }
-        else if(enemyClass == EnemyClass.fighter)
-        {
-            InterruptAttack();
-        }
 
         _agentLoc = _agent.transform.position;
 
-        float speedPercent = _agent.velocity.magnitude / _agent.speed;
+        var speedPercent = _agent.velocity.magnitude / _agent.speed;
         _animator.SetFloat(SpeedPercent, speedPercent, .1f, Time.deltaTime);
-        healthBar.fillAmount = health/_maxHealth;
-        if (health > _maxHealth)
-            healthBar.color = Color.red;
-        else
-            healthBar.color = Color.green;
-
-
-        // Do not forget to delete this before relase, or not I mean it is a mobile game
-        if (Input.GetKeyDown(KeyCode.Space))
-            EnemyTakesDamage(100);
     }
+    
     private void LateUpdate()
     {
-        healthBarTransform.LookAt(GameObject.Find("ViewTarget").transform);
-        //healthBarTransform.rotation = Quaternion.LookRotation(healthBarTransform.position - Camera.main.transform.position);
+        healthBarTransform.LookAt(GameManager.Instance.viewTarget);
     }
 
     private void EnemyAttacksCastle()
@@ -167,8 +157,13 @@ public class EnemyBehaviour : MonoBehaviour
     }
     public void EnemyTakesDamage(float damageValue)
     {
+        if (!enemyIsAlive) return;
+        
         health -= damageValue;
-        healthBar.fillAmount = health;
+        
+        healthBar.fillAmount = health/_maxHealth;
+        healthBar.color = health > _maxHealth ? Color.red : Color.green;
+        
         AudioManager.Instance.Play(ClipType.EnemyDamaged); //You sadistic piece of shit
         _animator.SetTrigger(Hurt);
         //GameManager.Instance.HitStop(0.06f);
@@ -178,6 +173,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void EnemyDies()
     {
+        if(enemyClass == EnemyClass.fighter)
+        {
+            InterruptAttack();
+        }
+        
         Instantiate(GameManager.Instance.goldCoin, new Vector3(transform.position.x, 4f, transform.position.z),Quaternion.identity);
         enemyIsAlive = false;
         _agent.isStopped = true;

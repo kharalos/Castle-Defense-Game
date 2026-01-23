@@ -19,6 +19,9 @@ public class ShopController : MonoBehaviour
             anim.SetTrigger("Slide Left");
             shopIsOpen = true;
         }
+        else {
+            SlideRight();
+        }
     }
     public void SlideRight()
     {
@@ -32,6 +35,7 @@ public class ShopController : MonoBehaviour
     void ShopOpened()
     {
         gm.Pause();
+        gm.UpdateShopItems();
     }
     void ShopClosed()
     {
