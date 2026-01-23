@@ -68,8 +68,8 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.Play(ClipType.ThemeMusic);
         recordedIntervalTime = spawnIntervalTime;
         FindFirstObjectByType<PlayerHeroController>().SetAttackRange(attackRange, attackRange / _startingAttackRange);
-        StartCoroutine(SpawnIntervals(spawnIntervalTime, selectedEnemy));
-        StartCoroutine(PowerupIntervals());
+        StartCoroutine(SpawnIntervals());
+        StartCoroutine(PowerUpIntervals());
     }
 
     // Update is called once per frame
@@ -164,22 +164,29 @@ public class GameManager : MonoBehaviour
 
         }
     }
-    IEnumerator PowerupIntervals()
+
+    private IEnumerator PowerUpIntervals()
     {
-        yield return new WaitForSeconds(powerupIntervalTime);
-        int powerupRange = Random.Range(0, powerups.Length);
-        Vector3 powerupLoc = new Vector3(Random.Range(-8, 8), 1, Random.Range(-10, 20));
-        Instantiate(powerups[powerupRange], powerupLoc, Quaternion.identity);
-        StartCoroutine(PowerupIntervals());
+        while (this)
+        {
+            yield return new WaitForSeconds(powerupIntervalTime);
+            int powerupRange = Random.Range(0, powerups.Length);
+            Vector3 powerupLoc = new Vector3(Random.Range(-8, 8), 1, Random.Range(-10, 20));
+            Instantiate(powerups[powerupRange], powerupLoc, Quaternion.identity);
+        }
     }
-    IEnumerator SpawnIntervals(float time, int enemyIndexNumber)
+    
+    IEnumerator SpawnIntervals()
     {
-        Instantiate(enemies[enemyIndexNumber], spawner.transform.position, new Quaternion(0,180,0,0));
-        numOfEnemies++;
-        fatedNumber = Random.Range(0, 101);
-        yield return new WaitForSeconds(time);
-        StartCoroutine(SpawnIntervals(spawnIntervalTime, selectedEnemy));
+        while (this)
+        {
+            Instantiate(enemies[selectedEnemy], spawner.transform.position, new Quaternion(0,180,0,0));
+            numOfEnemies++;
+            fatedNumber = Random.Range(0, 101);
+            yield return new WaitForSeconds(spawnIntervalTime);
+        }
     }
+    
     public void CastleHealthDecreases(int valueChanged)
     {
         health -= valueChanged;
@@ -194,9 +201,9 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         paused = false;
     }
-    public void IncreaseCoinAmount()
+    public void IncreaseCoinAmount(int coinAmount)
     {
-        coin++;
+        coin += coinAmount;
     }
     public void ChangeCoinAmount(int change)
     {

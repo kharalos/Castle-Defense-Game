@@ -1,20 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CoinController : MonoBehaviour
 {
+    public float destroyDelay = 10f;
+    public int coinAmount = 1;
+
     private void Start()
     {
-        Destroy(gameObject, 10f);
+        Destroy(gameObject, destroyDelay);
     }
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
-        {
-            GameManager.Instance.IncreaseCoinAmount();
-            AudioManager.Instance.Play(ClipType.CoinAcquired);
-            Destroy(gameObject);
-        }
+        if (!other.CompareTag("Player")) return;
+        
+        GameManager.Instance.IncreaseCoinAmount(coinAmount);
+        AudioManager.Instance.Play(ClipType.CoinAcquired);
+        Destroy(gameObject);
     }
 }
