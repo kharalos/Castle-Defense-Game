@@ -116,6 +116,6 @@ public class ArcherController : MonoBehaviour
         var arrowBehaviour = arrowIns.GetComponent<ArrowBehaviour>();   
         arrowBehaviour.target = _closestEnemy;
         arrowBehaviour.archerIndex = archerIndex;
-        AudioManager.Instance.Play("Arrow Fired");
+        AudioManager.Instance.Play(ClipType.ArrowFired);
     }
 }

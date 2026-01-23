@@ -13,7 +13,7 @@ public class CoinController : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             GameManager.Instance.IncreaseCoinAmount();
-            AudioManager.Instance.Play("Coin Acquired");
+            AudioManager.Instance.Play(ClipType.CoinAcquired);
             Destroy(gameObject);
         }
     }

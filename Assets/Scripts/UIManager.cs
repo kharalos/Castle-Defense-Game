@@ -1,55 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    GameManager gm;
+    private static GameManager Gm => GameManager.Instance;
 
-    public Image castleHealthBar;
+    public Image castleHealthBar, jumpFiller;
     public TextMeshProUGUI castleHealthText, enemyNumber, coinNumber;
     public GameObject deathMenu;
     public Toggle musicToggle;
-    public Button archer1, archer2, archer3, damageButton;
+    public Button archer1, archer2, archer3, damageButton, rangeButton, jumpButton;
     public Button archerFasten1, archerFasten2, archerFasten3;
     public Button archerDamage1, archerDamage2, archerDamage3;
-    bool archer1bought, archer2bought, archer3bought;
-    void Start()
-    {
-        if (GameObject.Find("GameManager").GetComponent<GameManager>())
-            gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-        else
-        {
-            Debug.LogError("Game Manager could not be found.");
-        }
-    }
+    
+    private bool _archer1Bought, _archer2Bought, _archer3Bought;
 
     // Update is called once per frame
     void Update()
     {
-        castleHealthBar.fillAmount = gm.health / 100;
-        castleHealthText.text = gm.health.ToString();
+        castleHealthBar.fillAmount = Gm.health / 100;
+        castleHealthText.text = Gm.health.ToString(CultureInfo.InvariantCulture);
         enemyNumber.text = GameManager.Instance.slainEnemies.ToString();
         coinNumber.text = GameManager.Instance.coin.ToString();
 
         ArcherButtons();
-        if (gm.coin >= 30)
-        {
-            damageButton.interactable = true;
-        }
-        else
-            damageButton.interactable = false;
+        damageButton.interactable = Gm.coin >= 30;
+        rangeButton.interactable = Gm.coin >= 40;
     }
     
     void ArcherButtons()
     {
-        if (gm.coin >= 20)
+        if (Gm.coin >= 20)
         {
-            archer1.interactable = !archer1bought;
-            archer2.interactable = !archer2bought;
-            archer3.interactable = !archer3bought;
+            archer1.interactable = !_archer1Bought;
+            archer2.interactable = !_archer2Bought;
+            archer3.interactable = !_archer3Bought;
         }
         else
         {
@@ -58,23 +47,23 @@ public class UIManager : MonoBehaviour
             archer3.interactable = false;
         }
         
-        archer1.gameObject.SetActive(!archer1bought);
-        archer2.gameObject.SetActive(!archer2bought);
-        archer3.gameObject.SetActive(!archer3bought);
+        archer1.gameObject.SetActive(!_archer1Bought);
+        archer2.gameObject.SetActive(!_archer2Bought);
+        archer3.gameObject.SetActive(!_archer3Bought);
         
-        archerFasten1.gameObject.SetActive(archer1bought);
-        archerFasten2.gameObject.SetActive(archer2bought);
-        archerFasten3.gameObject.SetActive(archer3bought);
+        archerFasten1.gameObject.SetActive(_archer1Bought);
+        archerFasten2.gameObject.SetActive(_archer2Bought);
+        archerFasten3.gameObject.SetActive(_archer3Bought);
         
-        archerDamage1.gameObject.SetActive(archer1bought);
-        archerDamage2.gameObject.SetActive(archer2bought);
-        archerDamage3.gameObject.SetActive(archer3bought);
+        archerDamage1.gameObject.SetActive(_archer1Bought);
+        archerDamage2.gameObject.SetActive(_archer2Bought);
+        archerDamage3.gameObject.SetActive(_archer3Bought);
 
-        if (gm.coin >= 40)
+        if (Gm.coin >= 40)
         {
-            archerFasten1.interactable = archer1bought;
-            archerFasten2.interactable = archer2bought;
-            archerFasten3.interactable = archer3bought;
+            archerFasten1.interactable = _archer1Bought;
+            archerFasten2.interactable = _archer2Bought;
+            archerFasten3.interactable = _archer3Bought;
         }
         else
         {
@@ -83,11 +72,11 @@ public class UIManager : MonoBehaviour
             archerFasten3.interactable = false;
         }
         
-        if (gm.coin >= 50)
+        if (Gm.coin >= 50)
         {
-            archerDamage1.interactable = archer1bought;
-            archerDamage2.interactable = archer2bought;
-            archerDamage3.interactable = archer3bought;
+            archerDamage1.interactable = _archer1Bought;
+            archerDamage2.interactable = _archer2Bought;
+            archerDamage3.interactable = _archer3Bought;
         }
         else
         {
@@ -98,7 +87,7 @@ public class UIManager : MonoBehaviour
     }
     public void MusicToggle()
     {
-        AudioManager.Instance.Mute("Theme Music");
+        AudioManager.Instance.Mute(ClipType.ThemeMusic);
     }
     public void OpenDeathMenu()
     {
@@ -106,42 +95,69 @@ public class UIManager : MonoBehaviour
     }
     public void ArcherButton1()
     {
-        gm.ChangeCoinAmount(-20);
-        gm.ActivateArcher(0);
-        AudioManager.Instance.Play("Buy Sound");
-        archer1bought = true;
+        Gm.ChangeCoinAmount(-20);
+        Gm.ActivateArcher(0);
+        AudioManager.Instance.Play(ClipType.BuySound);
+        _archer1Bought = true;
     }
     public void ArcherButton2()
     {
-        gm.ChangeCoinAmount(-20);
-        gm.ActivateArcher(1);
-        AudioManager.Instance.Play("Buy Sound");
-        archer2bought = true;
+        Gm.ChangeCoinAmount(-20);
+        Gm.ActivateArcher(1);
+        AudioManager.Instance.Play(ClipType.BuySound);
+        _archer2Bought = true;
     }
     public void ArcherButton3()
     {
-        gm.ChangeCoinAmount(-20);
-        gm.ActivateArcher(2);
-        AudioManager.Instance.Play("Buy Sound");
-        archer3bought = true;
+        Gm.ChangeCoinAmount(-20);
+        Gm.ActivateArcher(2);
+        AudioManager.Instance.Play(ClipType.BuySound);
+        _archer3Bought = true;
     }
     public void ArcherFastenButton(int archerIndex)
     {
-        gm.ChangeCoinAmount(-40);
-        gm.ActivateFastenArcher(archerIndex);
-        AudioManager.Instance.Play("Buy Sound");
+        Gm.ChangeCoinAmount(-40);
+        Gm.ActivateFastenArcher(archerIndex);
+        AudioManager.Instance.Play(ClipType.BuySound);
     }
     
     public void ArcherDamageButton(int archerIndex)
     {
-        gm.ChangeCoinAmount(-50);
-        gm.ActivateDamageArcher(archerIndex);
-        AudioManager.Instance.Play("Buy Sound");
+        Gm.ChangeCoinAmount(-50);
+        Gm.ActivateDamageArcher(archerIndex);
+        AudioManager.Instance.Play(ClipType.BuySound);
     }
     
     public void DamageButton()
     {
-        gm.IncreaseDamage(1);
-        gm.ChangeCoinAmount(-30);
+        Gm.IncreaseDamage(1);
+        Gm.ChangeCoinAmount(-30);
+    }
+    
+    public void RangeButton()
+    {
+        Gm.IncreaseRange();
+        Gm.ChangeCoinAmount(-30);
+    }
+
+    public void StartJumpCooldown(float cooldownTime)
+    {
+        StartCoroutine(JumpCooldown(cooldownTime));
+    }
+    
+    public IEnumerator JumpCooldown(float cooldownTime)
+    {
+        jumpButton.interactable = false;
+        jumpFiller.fillAmount = 1;
+        var elapsed = 0f;
+        while (elapsed < cooldownTime)
+        {
+            elapsed += Time.deltaTime;
+            jumpFiller.fillAmount = 1 - (elapsed / cooldownTime);
+            yield return null;
+        }
+        
+        jumpFiller.fillAmount = 0;
+        jumpButton.interactable = true;
     }
 }

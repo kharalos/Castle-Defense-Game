@@ -22,16 +22,16 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
         }
     }
-    public void Play (string clip)
+    public void Play (ClipType clip)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == clip);
+        Sound s = Array.Find(sounds, sound => sound.clipType == clip);
         if (s == null)
             return;
         s.source.Play();
     }
-    public void Mute (string clip)
+    public void Mute (ClipType clip)
     {
-        Sound s = Array.Find(sounds, sound => sound.name == clip);
+        Sound s = Array.Find(sounds, sound => sound.clipType == clip);
         if (s == null)
             return;
         s.source.mute = !s.source.mute;

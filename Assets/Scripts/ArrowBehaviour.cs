@@ -28,7 +28,7 @@ public class ArrowBehaviour : MonoBehaviour
         if (other.CompareTag("Enemy") && !struck)
         {
             other.GetComponent<EnemyBehaviour>().EnemyTakesDamage(50 * GameManager.Instance.archerDamageMultiplier[archerIndex]);
-            AudioManager.Instance.Play("Arrow Pierces");
+            AudioManager.Instance.Play(ClipType.ArrowPierces);
             transform.parent = other.transform;
             FreezeArrow();
         }
@@ -38,7 +38,7 @@ public class ArrowBehaviour : MonoBehaviour
     {
         struck = true;
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-        AudioManager.Instance.Play("Arrow Hit");
+        AudioManager.Instance.Play(ClipType.ArrowHit);
         Destroy(gameObject, destroyDelay);
     }
 }

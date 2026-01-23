@@ -62,7 +62,7 @@ public class PlayerAnimator : MonoBehaviour
     }
     public IEnumerator HeroKnockedback(Vector3 pos)
     {
-        AudioManager.Instance.Play("Hero Slashes");
+        AudioManager.Instance.Play(ClipType.HeroSlashes);
         transform.position += (transform.position - pos).normalized;
         float savedSpeed = _animator.speed;
         _agent.isStopped = true;

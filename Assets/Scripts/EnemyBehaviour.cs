@@ -150,7 +150,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (enemyIsAlive && !GameManager.Instance.shielded)
         {
             GameManager.Instance.CastleHealthDecreases(50);
-            AudioManager.Instance.Play("Explosion");
+            AudioManager.Instance.Play(ClipType.Explosion);
             FindFirstObjectByType<ExplosionController>().Explode(transform.position);
             enemyIsAlive = false;
         }
@@ -162,14 +162,14 @@ public class EnemyBehaviour : MonoBehaviour
         if (enemyIsAlive&&!GameManager.Instance.shielded)
         {
             GameManager.Instance.CastleHealthDecreases(10);
-            AudioManager.Instance.Play("Castle Hit");
+            AudioManager.Instance.Play(ClipType.CastleHit);
         }
     }
     public void EnemyTakesDamage(float damageValue)
     {
         health -= damageValue;
         healthBar.fillAmount = health;
-        AudioManager.Instance.Play("Enemy Hurts"); //You sadistic piece of shit
+        AudioManager.Instance.Play(ClipType.EnemyDamaged); //You sadistic piece of shit
         _animator.SetTrigger(Hurt);
         //GameManager.Instance.HitStop(0.06f);
         if (health <= 0&&enemyIsAlive)
@@ -184,8 +184,7 @@ public class EnemyBehaviour : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
         this.gameObject.GetComponent<CapsuleCollider>().enabled = false;
         _agent.enabled = false;
-        if(enemyClass == EnemyClass.giant) AudioManager.Instance.Play("Giant Dies");
-        else AudioManager.Instance.Play("Goblin Dies");
+        AudioManager.Instance.Play(enemyClass == EnemyClass.giant ? ClipType.GiantDeath : ClipType.MinionDeath);
         GameManager.Instance.IncreaseSlainEnemies();
         //dead animation
         _animator.SetTrigger(Die);

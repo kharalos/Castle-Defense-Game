@@ -6,18 +6,23 @@ using UnityEngine;
 public class PlayerHeroController : MonoBehaviour
 {
     public LayerMask movementMask;
-    [SerializeField]
-    private SphereCollider range;
-    Camera cam;
-    PlayerAnimator animator;
-    bool hasForce;
-    public ParticleSystem healedEffect, hastenedEffect;
+    [SerializeField] private float jumpHitRadius = 3f;
+    [SerializeField] private ParticleSystem healedEffect, hastenedEffect, jumpDropEffect, swingAroundEffect;
+    [SerializeField] private SphereCollider attackRangeCollider;
+    [SerializeField] private Transform attackSwingEffectPoint;
+    [SerializeField] private float attackSwingRotationSpeed = 10f;
 
-    bool attackNearby;
+    private Camera _cam;
+    private PlayerAnimator _animator;
+
+    private bool _attackNearby;
+    private bool _isRadialSwinging;
+    private float _attackRangeMultiplier = 1f;
+
     void Start()
     {
-        cam = Camera.main;
-        animator = GetComponent<PlayerAnimator>();
+        _cam = Camera.main;
+        _animator = GetComponent<PlayerAnimator>();
     }
 
     // Update is called once per frame
@@ -25,47 +30,102 @@ public class PlayerHeroController : MonoBehaviour
     {
         if (Input.GetMouseButton(0)&&!GameManager.Instance.paused)
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
 
             if (Physics.Raycast(ray, out hit, 100, movementMask))
             {
-                animator.MoveToPoint(hit.point,true);
+                _animator.MoveToPoint(hit.point,true);
             }
         }
         if (Input.GetMouseButtonUp(0) && !GameManager.Instance.paused)
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
 
             if (Physics.Raycast(ray, out hit, 100, movementMask))
             {
-                animator.MoveToPoint(hit.point, false);
+                _animator.MoveToPoint(hit.point, false);
             }
         }
-    }
-    void HeroSwings()
-    {
-        attackNearby = true;
-        AudioManager.Instance.Play("Hero Swings");
-    }
-    void SwingStopped()
-    {
-        attackNearby = false;
-        foreach (EnemyBehaviour e in FindObjectsOfType<EnemyBehaviour>())
+
+        if (_isRadialSwinging)
         {
-            e.notHit = true;
+            //rotate around the hero, y axis
+            attackSwingEffectPoint.Rotate(Vector3.up * attackSwingRotationSpeed * Time.deltaTime);
         }
     }
+    
+    public void SetAttackRange(float attackRange, float scaleMultiplier)
+    {
+        attackRangeCollider.radius = attackRange;
+        var shape = swingAroundEffect.shape;
+        shape.radius = attackRange;
+        var position = shape.position;
+        position.z = attackRange / 2f;
+        shape.position = position;
+        _attackRangeMultiplier = scaleMultiplier;
+        
+        var jumpDropMain = jumpDropEffect.main;
+        var x = jumpDropMain.startSizeX;
+        x.constant = 4.58f * scaleMultiplier * 2f;
+        jumpDropMain.startSizeX = x;
+        
+        var y = jumpDropMain.startSizeY;
+        y.constant = 4.58f * scaleMultiplier * 2f;
+        jumpDropMain.startSizeY = y;
+    }
+    
+    void HeroSwings()
+    {
+        _attackNearby = true;
+        AudioManager.Instance.Play(ClipType.HeroSwings);
+    }
+    
+    void HeroRadialSwing()
+    {
+        _isRadialSwinging = true;
+        swingAroundEffect.Play();
+        attackSwingEffectPoint.localEulerAngles = Vector3.zero;
+    }
+    
+    void SwingStopped()
+    {
+        _attackNearby = false;
+        _isRadialSwinging = false;
+        foreach (var e in FindObjectsByType<EnemyBehaviour>(FindObjectsSortMode.InstanceID)) e.notHit = true;
+        swingAroundEffect.Stop();
+    }
+
+    private RaycastHit[] _jumpDropHits = new RaycastHit[50];
+    void JumpDrop()
+    {
+        jumpDropEffect.Play();
+        AudioManager.Instance.Play(ClipType.JumpDrop);
+
+        //create a spherecast downwards to hit enemies in range
+        Physics.SphereCastNonAlloc(transform.position + Vector3.up,
+            jumpHitRadius * _attackRangeMultiplier, Vector3.down, _jumpDropHits, jumpHitRadius * _attackRangeMultiplier);
+        foreach (var hit in _jumpDropHits)
+        {
+            if (hit.collider==null || !hit.collider.CompareTag("Enemy")) continue;
+            
+            hit.collider.GetComponent<EnemyBehaviour>()
+                .EnemyTakesDamage(100 * GameManager.Instance.heroDamageMultiplier);
+        }
+        
+        GameManager.Instance.StartJumpCooldown();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Haste"))
         {
             GetComponent<PlayerMatManager>().GoBlue();
-            AudioManager.Instance.Play("Hero Hastened");
-            animator.Hastened();
+            AudioManager.Instance.Play(ClipType.HeroHastened);
+            _animator.Hastened();
             hastenedEffect.Play();
             Destroy(other.gameObject);
         }
@@ -82,7 +142,7 @@ public class PlayerHeroController : MonoBehaviour
         }
         if (other.CompareTag("Health"))
         {
-            AudioManager.Instance.Play("Health Restored");
+            AudioManager.Instance.Play(ClipType.HealthRestored);
             GameManager.Instance.CastleHealthDecreases(-20);
             healedEffect.Play();
             Destroy(other.gameObject);
@@ -99,17 +159,17 @@ public class PlayerHeroController : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             //if idle state then enter state attacking then target the enemy
-            animator.TriggerAttack();
+            _animator.TriggerAttack();
 
             //enemy loses hp
-            if (attackNearby && other.GetComponent<EnemyBehaviour>().notHit)
+            if (_attackNearby && other.GetComponent<EnemyBehaviour>().notHit)
             {
                 other.GetComponent<EnemyBehaviour>().EnemyTakesDamage(50*GameManager.Instance.heroDamageMultiplier);
-                AudioManager.Instance.Play("Hero Slashes");
+                AudioManager.Instance.Play(ClipType.HeroSlashes);
                 other.GetComponent<EnemyBehaviour>().notHit = false;
             }
             if (!other.GetComponent<EnemyBehaviour>().enemyIsAlive)
-                animator.StopAttacking();
+                _animator.StopAttacking();
 
             //if has special ability not on cooldown use it
         }
@@ -118,7 +178,7 @@ public class PlayerHeroController : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            animator.StopAttacking();
+            _animator.StopAttacking();
         }
     }
 }

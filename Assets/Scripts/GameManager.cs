@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] enemies,powerups,archers;
     public float spawnIntervalTime;
     public float powerupIntervalTime;
+    public float attackRange = 1.5f;
     public bool enemyTargeting;
     public bool shielded;
 
@@ -28,6 +29,8 @@ public class GameManager : MonoBehaviour
     public float[] archerSpeedMultiplier = {1, 1, 1};
     public int[] archerDamageMultiplier = {1, 1, 1};
     public float enemyHealthMultiplier;
+    
+    public float jumpDropCooldownTime = 5f;
 
     public int selectedEnemy;// 0 is for goblin, change it for difficulty
     [SerializeField]
@@ -38,6 +41,8 @@ public class GameManager : MonoBehaviour
 
     float recordedIntervalTime;
     public GameObject theQueen;
+    
+    private float _startingAttackRange;
 
     [SerializeField] private AdsManager adm;
 
@@ -46,6 +51,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         archerSpeedMultiplier = new[] {1f, 1f, 1f};
         archerDamageMultiplier = new[] {1, 1, 1};
+        _startingAttackRange = attackRange;
     }
 
     void Start()
@@ -59,8 +65,9 @@ public class GameManager : MonoBehaviour
         selectedEnemy = 0;
         numOfEnemies = 0;
         slainEnemies = 0;
-        AudioManager.Instance.Play("Theme Music");
+        AudioManager.Instance.Play(ClipType.ThemeMusic);
         recordedIntervalTime = spawnIntervalTime;
+        FindFirstObjectByType<PlayerHeroController>().SetAttackRange(attackRange, attackRange / _startingAttackRange);
         StartCoroutine(SpawnIntervals(spawnIntervalTime, selectedEnemy));
         StartCoroutine(PowerupIntervals());
     }
@@ -214,7 +221,18 @@ public class GameManager : MonoBehaviour
     {
         heroDamageMultiplier += increasedValue;
     }
-
+    
+    public void IncreaseRange()
+    {
+        attackRange += 0.5f;
+        FindFirstObjectByType<PlayerHeroController>().SetAttackRange(attackRange, attackRange / _startingAttackRange);
+    }
+    
+    public void StartJumpCooldown()
+    {
+        FindFirstObjectByType<UIManager>().StartJumpCooldown(jumpDropCooldownTime);
+    }
+    
     public void Shielded(int time)
     {
         StartCoroutine(Unshield(time));
@@ -263,4 +281,6 @@ public class GameManager : MonoBehaviour
         waiting = false;
     }
     #endregion
+
+
 }

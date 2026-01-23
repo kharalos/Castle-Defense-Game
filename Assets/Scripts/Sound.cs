@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class Sound 
 {
-    public string name;
+    public ClipType clipType;
     public AudioClip clip;
 
     [Range(0f,1f)]
@@ -20,4 +18,24 @@ public class Sound
 
     [HideInInspector]
     public AudioSource source;
+}
+
+public enum ClipType
+{
+    ArrowFired = 0,
+    ArrowPierces = 1,
+    ArrowHit = 2,
+    EnemyDamaged = 3,
+    GiantDeath = 4,
+    MinionDeath = 5,
+    CastleHit = 6,
+    BuySound = 7,
+    HealthRestored = 8,
+    JumpDrop = 9,
+    CoinAcquired = 10,
+    Explosion = 11,
+    ThemeMusic = 12,
+    HeroSlashes = 13,
+    HeroSwings = 14,
+    HeroHastened = 15,
 }
