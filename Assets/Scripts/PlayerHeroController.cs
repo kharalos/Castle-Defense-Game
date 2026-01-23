@@ -19,33 +19,31 @@ public class PlayerHeroController : MonoBehaviour
     private bool _isRadialSwinging;
     private float _attackRangeMultiplier = 1f;
 
-    void Start()
+    private void Start()
     {
         _cam = Camera.main;
         _animator = GetComponent<PlayerAnimator>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetMouseButton(0)&&!GameManager.Instance.paused)
+        if(GameManager.Instance.paused) return;
+        
+        if (Input.GetMouseButton(0))
         {
-            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            var ray = _cam.ScreenPointToRay(Input.mousePosition);
 
-
-            if (Physics.Raycast(ray, out hit, 100, movementMask))
+            if (Physics.Raycast(ray, out var hit, 100, movementMask))
             {
                 _animator.MoveToPoint(hit.point,true);
             }
         }
-        if (Input.GetMouseButtonUp(0) && !GameManager.Instance.paused)
+        if (Input.GetMouseButtonUp(0))
         {
-            Ray ray = _cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+            var ray = _cam.ScreenPointToRay(Input.mousePosition);
 
-
-            if (Physics.Raycast(ray, out hit, 100, movementMask))
+            if (Physics.Raycast(ray, out var hit, 100, movementMask))
             {
                 _animator.MoveToPoint(hit.point, false);
             }
@@ -77,21 +75,21 @@ public class PlayerHeroController : MonoBehaviour
         y.constant = 4.58f * scaleMultiplier * 2f;
         jumpDropMain.startSizeY = y;
     }
-    
-    void HeroSwings()
+
+    private void HeroSwings()
     {
         _attackNearby = true;
         AudioManager.Instance.Play(ClipType.HeroSwings);
     }
-    
-    void HeroRadialSwing()
+
+    private void HeroRadialSwing()
     {
         _isRadialSwinging = true;
         swingAroundEffect.Play();
         attackSwingEffectPoint.localEulerAngles = Vector3.zero;
     }
-    
-    void SwingStopped()
+
+    private void SwingStopped()
     {
         _attackNearby = false;
         _isRadialSwinging = false;
@@ -99,11 +97,13 @@ public class PlayerHeroController : MonoBehaviour
         swingAroundEffect.Stop();
     }
 
-    private RaycastHit[] _jumpDropHits = new RaycastHit[50];
-    void JumpDrop()
+    private readonly RaycastHit[] _jumpDropHits = new RaycastHit[50];
+
+    private void JumpDrop()
     {
         jumpDropEffect.Play();
         AudioManager.Instance.Play(ClipType.JumpDrop);
+        GameManager.Instance.HitStop(0.06f);
 
         //create a spherecast downwards to hit enemies in range
         Physics.SphereCastNonAlloc(transform.position + Vector3.up,

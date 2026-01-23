@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +6,7 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance { get; set; }
+    public static UIManager Instance { get; private set; }
     private static GameManager Gm => GameManager.Instance;
     
     public ShopData shopData;
@@ -66,6 +64,7 @@ public class UIManager : MonoBehaviour
     public void SetCoin(int coin)
     {
         coinNumber.text = coin.ToString();
+        UpdateButtons(coin);
     }
     
     public void UpdateButtons(int coin)
@@ -133,7 +132,7 @@ public class UIManager : MonoBehaviour
         deathMenu.SetActive(true);
     }
     
-    public void OnArcherButton(int index)
+    private void OnArcherButton(int index)
     {
         Gm.ChangeCoinAmount(-20);
         Gm.ActivateArcher(index);
@@ -143,28 +142,28 @@ public class UIManager : MonoBehaviour
         else if (index == 2) _archer3Bought = true;
     }
 
-    public void OnArcherFastenButton(int archerIndex)
+    private void OnArcherFastenButton(int archerIndex)
     {
         Gm.ChangeCoinAmount(-40);
         Gm.ActivateFastenArcher(archerIndex);
         AudioManager.Instance.Play(ClipType.BuySound);
     }
     
-    public void OnArcherDamageButton(int archerIndex)
+    private void OnArcherDamageButton(int archerIndex)
     {
         Gm.ChangeCoinAmount(-50);
         Gm.ActivateDamageArcher(archerIndex);
         AudioManager.Instance.Play(ClipType.BuySound);
     }
     
-    public void OnDamageButton()
+    private void OnDamageButton()
     {
         Gm.IncreaseDamage(1);
         Gm.ChangeCoinAmount(-30);
         AudioManager.Instance.Play(ClipType.BuySound);
     }
     
-    public void OnRangeButton()
+    private void OnRangeButton()
     {
         Gm.IncreaseRange();
         Gm.ChangeCoinAmount(-30);

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class PlayerAnimator : MonoBehaviour
 {
@@ -11,92 +12,86 @@ public class PlayerAnimator : MonoBehaviour
 
     private const float LocoAnimSmoothTime = .1f;
 
-    private NavMeshAgent _agent;
-    private Animator _animator;
-    private Rigidbody _body;
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Rigidbody body;
+    [SerializeField] private PlayerMatManager matManager;
     private Vector3 _newPoint;
     
     public float targetingRadius;
-
-    private void Start()
-    {
-        _agent = GetComponent<NavMeshAgent>();
-        _animator = GetComponent<Animator>();
-        _body = GetComponent<Rigidbody>();
-    }
-
-    // Update is called once per frame
+    
     private void Update()
     {
-        float speedPercent = _agent.velocity.magnitude / _agent.speed;
-        _animator.SetFloat(SpeedPercent, speedPercent, LocoAnimSmoothTime, Time.deltaTime);
+        var speedPercent = agent.velocity.magnitude / agent.speed;
+        animator.SetFloat(SpeedPercent, speedPercent, LocoAnimSmoothTime, Time.deltaTime);
     }
+    
     public void MoveToPoint(Vector3 point, bool holdingTouch)
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        bool thereIsTarget = false;
+        var thereIsTarget = false;
 
-        foreach (GameObject enemy in enemies)
+        var gameManager = GameManager.Instance;
+        foreach (var enemy in gameManager.AliveEnemies)
         {
-            Vector3 distance = enemy.transform.position - point;
+            var distance = enemy.transform.position - point;
             if (distance.magnitude < targetingRadius)
             {
                 _newPoint = enemy.transform.position;
                 thereIsTarget = true;
             }
-            if (!enemy.GetComponent<EnemyBehaviour>().enemyIsAlive)
+            if (!enemy.enemyIsAlive)
                 thereIsTarget = false;
         }
-        if (FindFirstObjectByType<GameManager>().enemyTargeting && thereIsTarget && holdingTouch)
-        {
-            _agent.SetDestination(_newPoint);
-        }
+
+        if (gameManager.enemyTargeting && thereIsTarget && holdingTouch)
+            agent.SetDestination(_newPoint);
         else
-            _agent.SetDestination(point);
+            agent.SetDestination(point);
     }
+    
     public void Hastened()
     {
-        _agent.speed *= 1.5f;
-        _animator.speed *= 1.5f;
+        agent.speed *= 1.5f;
+        animator.speed *= 1.5f;
         StartCoroutine(NormalizedSpeed());
     }
-    public IEnumerator HeroKnockedback(Vector3 pos)
+    
+    public IEnumerator HeroKnockedBack(Vector3 pos)
     {
         AudioManager.Instance.Play(ClipType.HeroSlashes);
         transform.position += (transform.position - pos).normalized;
-        float savedSpeed = _animator.speed;
-        _agent.isStopped = true;
-        _body.constraints = RigidbodyConstraints.FreezePosition;
+        agent.isStopped = true;
+        body.constraints = RigidbodyConstraints.FreezePosition;
         yield return new WaitForSeconds(.2f);
-        _body.constraints = RigidbodyConstraints.None;
-        _agent.isStopped = false;
+        body.constraints = RigidbodyConstraints.None;
+        agent.isStopped = false;
     }
 
     private IEnumerator NormalizedSpeed()
     {
         yield return new WaitForSeconds(10);
-        _agent.speed = (_agent.speed * 2) / 3;
-        _animator.speed = (_animator.speed * 2) / 3;
-        GetComponent<PlayerMatManager>().GoRed();
+        agent.speed = (agent.speed * 2) / 3;
+        animator.speed = (animator.speed * 2) / 3;
+        matManager.GoRed();
     }
     
     public void TriggerAttack()
     {
-        _animator.SetTrigger(Attack);
+        animator.SetTrigger(Attack);
     }
     
     public void StopAttacking()
     {
-        _animator.ResetTrigger(Attack);
+        animator.ResetTrigger(Attack);
     }
     
     public void LowJump()
     {
-        _animator.SetTrigger(Jump);
+        animator.SetTrigger(Jump);
     }
     
     public void HighJump()
     {
-        _animator.SetTrigger(HighJumpTrigger);
+        animator.SetTrigger(HighJumpTrigger);
     }
 }

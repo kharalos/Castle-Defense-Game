@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6095893928953068009}
   m_Layer: 13
   m_Name: GoldBundle
-  m_TagString: Haste
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

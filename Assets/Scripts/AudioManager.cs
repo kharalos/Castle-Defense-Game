@@ -8,10 +8,11 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
     public Sound[] sounds;
-    void Awake()
+
+    private void Awake()
     {    
         Instance = this;
-        foreach (Sound s in sounds)
+        foreach (var s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
@@ -24,16 +25,13 @@ public class AudioManager : MonoBehaviour
     }
     public void Play (ClipType clip)
     {
-        Sound s = Array.Find(sounds, sound => sound.clipType == clip);
-        if (s == null)
-            return;
-        s.source.Play();
+        var s = Array.Find(sounds, sound => sound.clipType == clip);
+        s?.source.Play();
     }
     public void Mute (ClipType clip)
     {
-        Sound s = Array.Find(sounds, sound => sound.clipType == clip);
-        if (s == null)
-            return;
+        var s = Array.Find(sounds, sound => sound.clipType == clip);
+        if (s == null) return;
         s.source.mute = !s.source.mute;
     }
 }

@@ -45,13 +45,14 @@ public class EnemyBehaviour : MonoBehaviour
     private void Start()
     {
         health *= GameManager.Instance.enemyHealthMultiplier;
+        GameManager.Instance.AliveEnemies.Add(this);
         _maxHealth = health;
         notHit = true;
         enemyIsAlive = true;
         _agent = GetComponent<NavMeshAgent>();
         _agentLoc = _agent.transform.position;
         _animator = GetComponent<Animator>();
-        _castleCl = GameObject.FindGameObjectWithTag("Castle").GetComponent<BoxCollider>().ClosestPoint(_agentLoc);
+        _castleCl = GameManager.Instance.castleCollider.ClosestPoint(_agentLoc);
         DetermineClass();
         
         _hero = FindFirstObjectByType<PlayerHeroController>();
@@ -132,7 +133,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void FighterHitsHero()
     {
-        StartCoroutine(FindFirstObjectByType<PlayerAnimator>().HeroKnockedback(transform.position));
+        StartCoroutine(FindFirstObjectByType<PlayerAnimator>().HeroKnockedBack(transform.position));
     }
 
     private void BomberExplodes()
@@ -144,17 +145,19 @@ public class EnemyBehaviour : MonoBehaviour
             FindFirstObjectByType<ExplosionController>().Explode(transform.position);
             enemyIsAlive = false;
         }
-        Destroy(gameObject, .2f);
+
+        health = 0;
+        EnemyDies(.2f);
     }
 
     private void GoblinDamagesCastle()
     {
-        if (enemyIsAlive&&!GameManager.Instance.shielded)
-        {
-            GameManager.Instance.CastleHealthDecreases(10);
-            AudioManager.Instance.Play(ClipType.CastleHit);
-        }
+        if (!enemyIsAlive || GameManager.Instance.shielded) return;
+        
+        GameManager.Instance.CastleHealthDecreases(10);
+        AudioManager.Instance.Play(ClipType.CastleHit);
     }
+    
     public void EnemyTakesDamage(float damageValue)
     {
         if (!enemyIsAlive) return;
@@ -166,12 +169,18 @@ public class EnemyBehaviour : MonoBehaviour
         
         AudioManager.Instance.Play(ClipType.EnemyDamaged); //You sadistic piece of shit
         _animator.SetTrigger(Hurt);
+        
         //GameManager.Instance.HitStop(0.06f);
-        if (health <= 0&&enemyIsAlive)
-            EnemyDies();
+        
+        if (health <= 0 && enemyIsAlive)
+        {
+            _animator.SetTrigger(Die);
+            AudioManager.Instance.Play(enemyClass == EnemyClass.giant ? ClipType.GiantDeath : ClipType.MinionDeath);
+            EnemyDies(3f);
+        }
     }
 
-    private void EnemyDies()
+    private void EnemyDies(float delay)
     {
         if(enemyClass == EnemyClass.fighter)
         {
@@ -184,11 +193,8 @@ public class EnemyBehaviour : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
         this.gameObject.GetComponent<CapsuleCollider>().enabled = false;
         _agent.enabled = false;
-        AudioManager.Instance.Play(enemyClass == EnemyClass.giant ? ClipType.GiantDeath : ClipType.MinionDeath);
-        GameManager.Instance.IncreaseSlainEnemies();
-        //dead animation
-        _animator.SetTrigger(Die);
-        Destroy(this.gameObject, 3f);
+        GameManager.Instance.IncreaseSlainEnemies(this);
+        Destroy(this.gameObject, delay);
         healthBarBg.CrossFadeAlpha(0, .15f, false);
     }
 }

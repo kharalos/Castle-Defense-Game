@@ -9,10 +9,12 @@ public enum SpellClass
 public class SpellBehaviour : MonoBehaviour
 {
     public SpellClass spellClass;
-    public GameObject target;
+    public EnemyBehaviour target;
     
     private Vector3 _randomPos;
-    void Start()
+    private bool _isSpawning;
+
+    private void Start()
     {
         Destroy(gameObject, 10f);
         _randomPos = new Vector3(Random.Range(-8, 8), -1, Random.Range(5, 15));
@@ -27,18 +29,26 @@ public class SpellBehaviour : MonoBehaviour
         {
             Disperse();
         }
-        else if (other.CompareTag("Enemy") && spellClass == SpellClass.healSpell && other.GetComponent<EnemyBehaviour>().enemyIsAlive)
+        else if (other.CompareTag("Enemy") && spellClass == SpellClass.healSpell &&
+                 other.TryGetComponent(out EnemyBehaviour enemy) && enemy.enemyIsAlive)
         {
-            other.GetComponent<EnemyBehaviour>().health += 100;
+            enemy.health += 100;
             Disperse();
         }
     }
-    void Disperse()
+
+    private void Disperse()
     {
-        if(spellClass == SpellClass.spawnSpell)
+        if(spellClass == SpellClass.spawnSpell && !_isSpawning)
         {
+            _isSpawning = true;
+            
+            for (int i = 0; i < GameManager.Instance.GetSpawnCountFromSpell(); i++)
+            {
+                Instantiate(GameManager.Instance.enemies[Random.Range(0, GameManager.Instance.enemies.Length)], transform.position, transform.rotation);
+            }
+            
             //SpawnVFX
-            Instantiate(GameManager.Instance.enemies[Random.Range(0, GameManager.Instance.enemies.Length)], transform.position, transform.rotation);
         }
         if(spellClass == SpellClass.healSpell)
         { 

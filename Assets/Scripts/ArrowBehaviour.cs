@@ -4,39 +4,44 @@ using UnityEngine;
 
 public class ArrowBehaviour : MonoBehaviour
 {
-    bool struck;
-    public GameObject target;
+    public EnemyBehaviour target;
     public float destroyDelay = 2f;
     public int archerIndex;
-    void Start()
+    
+    private bool _struck;
+
+    private void Start()
     {
         Destroy(gameObject, 15f);
-        struck = false;
+        _struck = false;
     }
+    
     private void FixedUpdate()
     {
-        if (target&&!struck)
+        if (target&&!_struck)
             transform.position = Vector3.Lerp(transform.position, target.transform.position, 5f*Time.deltaTime);
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Land"))
-        {
-            FreezeArrow();
-            transform.position += transform.up * 0.05f;
-        }
-        if (other.CompareTag("Enemy") && !struck)
+        if(_struck) return;
+        
+        if (other.CompareTag("Enemy"))
         {
             other.GetComponent<EnemyBehaviour>().EnemyTakesDamage(50 * GameManager.Instance.archerDamageMultiplier[archerIndex]);
             AudioManager.Instance.Play(ClipType.ArrowPierces);
             transform.parent = other.transform;
             FreezeArrow();
         }
+        else if (other.CompareTag("Land"))
+        {
+            FreezeArrow();
+            transform.position += transform.up * 0.05f;
+        }
     }
-    
-    void FreezeArrow()
+
+    private void FreezeArrow()
     {
-        struck = true;
+        _struck = true;
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
         AudioManager.Instance.Play(ClipType.ArrowHit);
         Destroy(gameObject, destroyDelay);

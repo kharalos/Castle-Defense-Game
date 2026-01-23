@@ -1,23 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ShopController : MonoBehaviour
 {
-    Animator anim;
-    GameManager gm;
-    bool shopIsOpen;
-    void Start()
+    private static readonly int Left = Animator.StringToHash("Slide Left");
+    private static readonly int Right = Animator.StringToHash("Slide Right");
+    
+    private Animator _anim;
+    private GameManager _gm;
+    private bool _shopIsOpen;
+
+    private void Start()
     {
-        anim = gameObject.GetComponent<Animator>();
-        gm = GameManager.Instance;
+        _anim = gameObject.GetComponent<Animator>();
+        _gm = GameManager.Instance;
     }
     public void SlideLeft()
     {
-        if (!shopIsOpen)
+        if (!_shopIsOpen)
         {
-            anim.SetTrigger("Slide Left");
-            shopIsOpen = true;
+            _anim.SetTrigger(Left);
+            _shopIsOpen = true;
         }
         else {
             SlideRight();
@@ -25,19 +27,21 @@ public class ShopController : MonoBehaviour
     }
     public void SlideRight()
     {
-        if (shopIsOpen)
+        if (_shopIsOpen)
         {
-            anim.SetTrigger("Slide Right");
-            gm.Unpause();
-            shopIsOpen = false;
+            _anim.SetTrigger(Right);
+            _gm.Unpause();
+            _shopIsOpen = false;
         }
     }
-    void ShopOpened()
+
+    private void ShopOpened()
     {
-        gm.Pause();
-        gm.UpdateShopItems();
+        _gm.Pause();
+        _gm.UpdateShopItems();
     }
-    void ShopClosed()
+
+    private void ShopClosed()
     {
         //
     }

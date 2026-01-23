@@ -30603,7 +30603,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &9142959733350960873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30639,6 +30639,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f334d60897f60904c812befe1ad501c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 9142959733350960849}
+  animator: {fileID: 6561361753746668861}
+  body: {fileID: 9142959733350960874}
+  matManager: {fileID: 9142959733350960873}
   targetingRadius: 3
 --- !u!4 &1003897086696662855 stripped
 Transform:
@@ -30648,6 +30652,11 @@ Transform:
 --- !u!4 &6196323227428292655 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6888806815857526915, guid: 4402e00a2cc74c44a8b26bf0a95b9cae, type: 3}
+  m_PrefabInstance: {fileID: 748783265420656812}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6561361753746668861 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 4402e00a2cc74c44a8b26bf0a95b9cae, type: 3}
   m_PrefabInstance: {fileID: 748783265420656812}
   m_PrefabAsset: {fileID: 0}
 --- !u!137 &6952515422309199036 stripped

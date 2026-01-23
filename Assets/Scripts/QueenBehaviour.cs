@@ -5,68 +5,97 @@ using UnityEngine;
 public class QueenBehaviour : MonoBehaviour
 {
     private static readonly int Speed = Animator.StringToHash("Speed");
+    private static readonly int ThrowSpawnSpell = Animator.StringToHash("ThrowSpawnSpell");
+    private static readonly int CastSpell = Animator.StringToHash("CastSpell");
+    private static readonly int ThrowHealSpell = Animator.StringToHash("ThrowHealSpell");
+    private static readonly int Interrupt = Animator.StringToHash("Interrupt");
+    private static readonly int Defeated = Animator.StringToHash("Defeated");
+    private static readonly int F = Animator.StringToHash("Float");
+
     public enum States { idle, combat, defeated}
     public States states;
-    Vector3 battlePos, defeatPos, oldPos, targetPos;
-    Rigidbody body;
-    Animator anim;
+    private Vector3 _battlePos, _defeatPos, _targetPos;
+    [SerializeField] private Animator anim;
     public GameObject leftSpell, rightSpell, leftSpellPreFab, rightSpellPreFab;
     public ParticleSystem castSpellPS;
-    public float intervalTime;
-    Coroutine interval;
-    // Start is called before the first frame update
-    void Start()
+    public Vector2 intervalRange = new(1f, 3f);
+
+    private Coroutine _interval;
+    private Vector2 _currentInterval;
+
+    private void Start()
     {
-        anim = gameObject.GetComponent<Animator>();
-        body = gameObject.GetComponent<Rigidbody>();
-        battlePos = new Vector3(0, 5, 13);
-        defeatPos = new Vector3(0, 0, 13);
-        targetPos = battlePos;
-        interval = StartCoroutine(IntervalRoutine());
+        _currentInterval = intervalRange;
+        _battlePos = new Vector3(0, 5, 13);
+        _defeatPos = new Vector3(0, 0, 13);
+        _targetPos = _battlePos;
+        _interval = StartCoroutine(IntervalRoutine());
+        StartCoroutine(MoveCoroutine());
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private IEnumerator IntervalRoutine()
     {
-        float velocity = (transform.position - oldPos).magnitude;
-        MoveToTarget(targetPos);
-        anim.SetFloat("Speed", velocity, .2f, Time.deltaTime);
-        oldPos = transform.position;
+        while (this)
+        {
+            yield return new WaitForSeconds(Random.Range(_currentInterval.x, _currentInterval.y));
+            var number = Random.Range(1, 5);
+            switch (number)
+            {
+                case 1:
+                    anim.SetTrigger(ThrowSpawnSpell);
+                    break;
+                case 2:
+                    anim.SetTrigger(CastSpell);
+                    break;
+                default:
+                {
+                    if (GameManager.Instance.AliveEnemies.Count > 0)
+                        anim.SetTrigger(ThrowHealSpell);
+                    break;
+                }
+            }
+        }
     }
-    IEnumerator IntervalRoutine()
-    {
-        yield return new WaitForSeconds(Random.Range(intervalTime-1,intervalTime+1));
-        int number = Random.Range(1, 5);
-        if (number == 1)
-            anim.SetTrigger("ThrowSpawnSpell");
-        else if (number == 2)
-            anim.SetTrigger("CastSpell");
-        else if (GameObject.FindGameObjectWithTag("Enemy"))
-            anim.SetTrigger("ThrowHealSpell");
-        StartCoroutine(IntervalRoutine());
-    }
-    void Defeat()
+
+    private void Defeat()
     {
         states = States.defeated;
-        StopCoroutine(interval);
-        targetPos = defeatPos;
+        StopCoroutine(_interval);
+        _targetPos = _defeatPos;
         CeaseSpelling();
-        anim.SetBool("Defeated", true);
+        anim.SetBool(Defeated, true);
     }
-    void MoveToTarget(Vector3 targetPosition)
+
+    private IEnumerator MoveCoroutine()
     {
-        body.MovePosition(body.position + ((targetPosition - body.position) * 2 * Time.deltaTime));
+        var originalDistance = (transform.position - _targetPos).magnitude;
+        while (true)
+        {
+            var distance = (transform.position - _targetPos).magnitude;
+            MoveToTarget(_targetPos);
+            anim.SetFloat(F, Mathf.InverseLerp(0.1f, originalDistance, distance));
+            yield return null;
+
+            if(distance < 0.1f)
+            {
+                yield break;
+            }
+        }
     }
-    
-    GameObject FindClosestEnemy()
+
+    private void MoveToTarget(Vector3 targetPosition)
     {
-        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 2f);
+    }
+
+    private EnemyBehaviour FindClosestEnemy()
+    {
         float distanceToClosestEnemy = Mathf.Infinity;
-        GameObject closestEnemy = null;
-        foreach (GameObject enemy in enemies)
+        EnemyBehaviour closestEnemy = null;
+        foreach (var enemy in GameManager.Instance.AliveEnemies)
         {
             float distance = (enemy.transform.position - transform.position).sqrMagnitude;
-            if (distance < distanceToClosestEnemy && enemy.GetComponent<EnemyBehaviour>().enemyIsAlive)
+            if (distance < distanceToClosestEnemy && enemy.enemyIsAlive)
             {
                 distanceToClosestEnemy = distance;
                 closestEnemy = enemy;
@@ -77,35 +106,40 @@ public class QueenBehaviour : MonoBehaviour
     }
 
 
-    void HealSpellThrow()
+    private void HealSpellThrow()
     {
         GameObject spellIns = Instantiate(rightSpellPreFab, rightSpell.transform.position, Quaternion.identity);
         spellIns.GetComponent<SpellBehaviour>().target = FindClosestEnemy();
         rightSpell.SetActive(false);
         StartCoroutine(TimerRecast());
     }
-    void SpawnSpellThrow()
+
+    private void SpawnSpellThrow()
     {
         GameObject spellIns = Instantiate(leftSpellPreFab, leftSpell.transform.position, Quaternion.identity);
         leftSpell.SetActive(false);
         StartCoroutine(TimerRecast());
     }
-    void CastSpellStart()
+
+    private void CastSpellStart()
     {
         castSpellPS.Play();
     }
-    void CastSpellEnd()
+
+    private void CastSpellEnd()
     {
         castSpellPS.Stop();
     }
-    void CeaseSpelling()
+
+    private void CeaseSpelling()
     {
-        anim.ResetTrigger("ThrowHealSpell");
-        anim.ResetTrigger("ThrowSpawnSpell");
-        anim.ResetTrigger("CastSpell");
-        anim.SetTrigger("Interrupt");
+        anim.ResetTrigger(ThrowHealSpell);
+        anim.ResetTrigger(ThrowSpawnSpell);
+        anim.ResetTrigger(CastSpell);
+        anim.SetTrigger(Interrupt);
     }
-    IEnumerator TimerRecast()
+
+    private IEnumerator TimerRecast()
     {
         yield return new WaitForSeconds(1);
         leftSpell.SetActive(true);
@@ -114,6 +148,7 @@ public class QueenBehaviour : MonoBehaviour
 
     public void SetSpeed(float speed)
     {
+        _currentInterval = new Vector2(intervalRange.x / speed, intervalRange.y / speed);
         anim.SetFloat(Speed, speed);
     }
 

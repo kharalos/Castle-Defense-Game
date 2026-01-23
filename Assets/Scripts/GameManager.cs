@@ -1,11 +1,12 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager Instance { get; private set; }
     [Header("Main Values")]
     public float health;
     public int coin;
@@ -21,8 +22,11 @@ public class GameManager : MonoBehaviour
     public bool enemyTargeting;
     public bool shielded;
 
+    public BoxCollider castleCollider;
     public GameObject shields;
+    public ArcherController archer1, archer2, archer3;
     public Transform viewTarget;
+    public QueenBehaviour theQueen;
 
     public int heroDamageMultiplier;
     public float[] archerSpeedMultiplier = {1, 1, 1};
@@ -34,13 +38,13 @@ public class GameManager : MonoBehaviour
     public int selectedEnemy;// 0 is for goblin, change it for difficulty
     [SerializeField] private int numOfEnemies;
     public int slainEnemies;
-
-    bool deathMenuIsOn = false;
-
-    float recordedIntervalTime;
-    public QueenBehaviour theQueen;
     
+
+    private bool _deathMenuIsOn = false;
+    private float _recordedIntervalTime;
     private float _startingAttackRange;
+    
+    public HashSet<EnemyBehaviour> AliveEnemies { get; } = new();
 
     private void Awake()
     {
@@ -50,7 +54,7 @@ public class GameManager : MonoBehaviour
         _startingAttackRange = attackRange;
     }
 
-    void Start()
+    private void Start()
     {
         // Application.targetFrameRate = 60;
         coin = 0;
@@ -62,13 +66,18 @@ public class GameManager : MonoBehaviour
         numOfEnemies = 0;
         slainEnemies = 0;
         AudioManager.Instance.Play(ClipType.ThemeMusic);
-        recordedIntervalTime = spawnIntervalTime;
+        _recordedIntervalTime = spawnIntervalTime;
         FindFirstObjectByType<PlayerHeroController>().SetAttackRange(attackRange, attackRange / _startingAttackRange);
         StartCoroutine(SpawnIntervals());
         StartCoroutine(PowerUpIntervals());
+
+        for (int i = 0; i < 3; i++)
+        {
+            UpdateArcherSpeed(i);
+        }
     }
 
-    void UpdatePhase()
+    private void UpdatePhase()
     {
         phase = numOfEnemies switch
         {
@@ -79,8 +88,9 @@ public class GameManager : MonoBehaviour
             > 80 and <= 100 => 5,
             > 100 and <= 120 => 6,
             > 120 and <= 200 => 7,
-            > 200  and <= 1000 => 8,
-            > 1000 => 9,
+            > 200 and <= 400 => 8,
+            > 400 and <= 600=> 9,
+            > 600 => 10,
             _ => phase
         };
 
@@ -89,54 +99,57 @@ public class GameManager : MonoBehaviour
         {
             // Beginning Phase: Only first goblins.
             case 1:
-                spawnIntervalTime = recordedIntervalTime - (numOfEnemies / 10f);
+                spawnIntervalTime = _recordedIntervalTime - (numOfEnemies / 10f);
                 selectedEnemy = 0;
                 break;
 
             // Second Phase: Include giants.
             case 2:
-                spawnIntervalTime = recordedIntervalTime - 1f - (numOfEnemies / 20f);
-                if (fatedNumber < 90) selectedEnemy = 0;
-                else selectedEnemy = 1;
+                spawnIntervalTime = _recordedIntervalTime - 1f - (numOfEnemies / 20f);
+                selectedEnemy = fatedNumber < 90 ? 0 : 1;
                 break;
 
             // Third Phase: Include shielders.
             case 3:
-                spawnIntervalTime = recordedIntervalTime - 2f - (numOfEnemies / 30f);
-                if (fatedNumber < 51) selectedEnemy = 0;
-                else if (fatedNumber < 90) selectedEnemy = 1;
-                else selectedEnemy = 2;
+                spawnIntervalTime = _recordedIntervalTime - 2f - (numOfEnemies / 30f);
+                selectedEnemy = fatedNumber switch {
+                    < 51 => 0,
+                    < 90 => 1,
+                    _ => 2 };
                 break;
 
             // Fourth Phase: Include fighters.
             case 4:
-                spawnIntervalTime = recordedIntervalTime - 4f;
+                spawnIntervalTime = _recordedIntervalTime - 4f;
                 enemyHealthMultiplier = 1.5f;
-                if (fatedNumber < 21) selectedEnemy = 0;
-                else if (fatedNumber < 50) selectedEnemy = 1;
-                else if (fatedNumber < 76) selectedEnemy = 2;
-                else selectedEnemy = 3;
+                selectedEnemy = fatedNumber switch {
+                    < 21 => 0,
+                    < 50 => 1,
+                    < 76 => 2,
+                    _ => 3 };
                 break;
 
             // Fifth Phase: Include bombers.
             case 5:
                 spawnIntervalTime = 1.6f;
-                if (fatedNumber < 16) selectedEnemy = 0;
-                else if (fatedNumber < 26) selectedEnemy = 1;
-                else if (fatedNumber < 51) selectedEnemy = 2;
-                else if (fatedNumber < 76) selectedEnemy = 3;
-                else selectedEnemy = 4;
+                selectedEnemy = fatedNumber switch {
+                    < 16 => 0,
+                    < 26 => 1,
+                    < 51 => 2,
+                    < 76 => 3,
+                    _ => 4 };
                 break;
 
             // Sixth Phase: Release the Kraken.
             case 6:
                 spawnIntervalTime = 1.4f;
                 enemyHealthMultiplier = 2f;
-                if (fatedNumber < 16) selectedEnemy = 0;
-                else if (fatedNumber < 26) selectedEnemy = 1;
-                else if (fatedNumber < 51) selectedEnemy = 2;
-                else if (fatedNumber < 76) selectedEnemy = 3;
-                else selectedEnemy = 4;
+                selectedEnemy = fatedNumber switch {
+                    < 16 => 0,
+                    < 26 => 1,
+                    < 51 => 2,
+                    < 76 => 3,
+                    _ => 4 };
                 // Pave the way for her.
 
                 break;
@@ -146,19 +159,56 @@ public class GameManager : MonoBehaviour
                 spawnIntervalTime = 1.2f;
                 theQueen.SetActive(true);
                 // She has arrived.
-                break;
 
+                selectedEnemy = fatedNumber switch {
+                    < 5 => 0,
+                    < 10 => 1,
+                    < 51 => 2,
+                    < 76 => 3,
+                    _ => 4 };
+
+                break;
             case 8:
-                var inverseLerp = Mathf.InverseLerp(200f, 1000f, numOfEnemies);
+                theQueen.SetActive(true);
+                var inverseLerp = Mathf.InverseLerp(200f, 400, numOfEnemies);
                 spawnIntervalTime = Mathf.Lerp(1f, 0.2f, inverseLerp);
                 theQueen.SetSpeed(Mathf.Lerp(1f, 2f, inverseLerp));
+                
+                selectedEnemy = fatedNumber switch {
+                    < 33 => 2,
+                    < 66 => 3,
+                    _ => 4 };
                 break;
             case 9:
-                inverseLerp = Mathf.InverseLerp(1000f, 2600f, numOfEnemies);
+                theQueen.SetActive(true);
+                inverseLerp = Mathf.InverseLerp(400f, 600f, numOfEnemies);
                 spawnIntervalTime = Mathf.Lerp(0.2f, 0.1f, inverseLerp);
                 theQueen.SetSpeed(Mathf.Lerp(2f, 6f, inverseLerp));
+                
+                selectedEnemy = fatedNumber switch {
+                    < 33 => 2,
+                    < 66 => 3,
+                    _ => 4 };
+                break;
+            case 10:
+                theQueen.SetActive(true);
+                spawnIntervalTime = 0.05f;
+                theQueen.SetSpeed(10f);
+
+                selectedEnemy = 4;
                 break;
         }
+    }
+    
+    public int GetSpawnCountFromSpell()
+    {
+        return phase switch
+        {
+            < 8 => Random.Range(1, 3),
+            < 9 => Random.Range(2, 5),
+            < 10 => Random.Range(5, 10),
+            _ => 30
+        };
     }
 
     private IEnumerator PowerUpIntervals()
@@ -171,8 +221,8 @@ public class GameManager : MonoBehaviour
             Instantiate(powerups[powerupRange], powerupLoc, Quaternion.identity);
         }
     }
-    
-    IEnumerator SpawnIntervals()
+
+    private IEnumerator SpawnIntervals()
     {
         while (this)
         {
@@ -189,7 +239,7 @@ public class GameManager : MonoBehaviour
         health -= valueChanged;
         UIManager.Instance.SetHealth(health);
         
-        if (health <= 0 && !deathMenuIsOn)
+        if (health <= 0 && !_deathMenuIsOn)
         {
             CastleIsDestroyed();
         }
@@ -222,8 +272,16 @@ public class GameManager : MonoBehaviour
     public void ActivateFastenArcher(int number)
     {
         archerSpeedMultiplier[number] += 0.5f;
+        UpdateArcherSpeed(number);
     }
-    
+
+    private void UpdateArcherSpeed(int number)
+    {
+        if(number == 0) archer1.SetSpeed(archerSpeedMultiplier[number]);
+        else if(number == 1) archer2.SetSpeed(archerSpeedMultiplier[number]);
+        else if(number == 2) archer3.SetSpeed(archerSpeedMultiplier[number]);
+    }
+
     public void ActivateDamageArcher(int number)
     {
         archerDamageMultiplier[number] *= 2;
@@ -251,7 +309,8 @@ public class GameManager : MonoBehaviour
         shielded = true;
         shields.SetActive(true);
     }
-    IEnumerator Unshield(int time)
+
+    private IEnumerator Unshield(int time)
     {
         yield return new WaitForSeconds(time);
         shielded = false;
@@ -259,20 +318,21 @@ public class GameManager : MonoBehaviour
         FindFirstObjectByType<PlayerMatManager>().GoRed();
     }
 
-    public void IncreaseSlainEnemies()
+    public void IncreaseSlainEnemies(EnemyBehaviour diedEnemy)
     {
         slainEnemies++;
         UIManager.Instance.SetEnemyNumber(slainEnemies);
+        AliveEnemies.Remove(diedEnemy);
     }
     
     public void UpdateShopItems()
     {
         UIManager.Instance.UpdateButtons(coin);
     }
-    
-    void CastleIsDestroyed()
+
+    private void CastleIsDestroyed()
     {
-        deathMenuIsOn = true;
+        _deathMenuIsOn = true;
         //open the menu
         UIManager.Instance.OpenDeathMenu();
         Time.timeScale = 0f;
@@ -283,21 +343,21 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
     #region Time Management
-    bool waiting;
+
+    private bool _waiting;
     public void HitStop(float duration)
     {
-        if (waiting)
-            return;
+        if (_waiting) return;
         Time.timeScale = 0.0f;
         StartCoroutine(HitStopWait(duration));
     }
 
-    IEnumerator HitStopWait(float duration)
+    private IEnumerator HitStopWait(float duration)
     {
-        waiting = true;
+        _waiting = true;
         yield return new WaitForSecondsRealtime(duration);
         Time.timeScale = 1f;
-        waiting = false;
+        _waiting = false;
     }
     #endregion
 }

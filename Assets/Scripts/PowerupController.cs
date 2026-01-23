@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PowerupController : MonoBehaviour
 {
-    void Start()
+    private void Start()
     {
-        Destroy(this.gameObject, 5f);
+        Destroy(gameObject, 5f);
     }
 }
