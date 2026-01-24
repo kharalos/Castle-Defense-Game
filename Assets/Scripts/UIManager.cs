@@ -134,25 +134,26 @@ public class UIManager : MonoBehaviour
     
     private void OnArcherButton(int index)
     {
-        Gm.ChangeCoinAmount(-20);
-        Gm.ActivateArcher(index);
-        AudioManager.Instance.Play(ClipType.BuySound);
         if (index == 0) _archer1Bought = true;
         else if (index == 1) _archer2Bought = true;
         else if (index == 2) _archer3Bought = true;
+        
+        Gm.ActivateArcher(index);
+        Gm.ChangeCoinAmount(-20);
+        AudioManager.Instance.Play(ClipType.BuySound);
     }
 
     private void OnArcherFastenButton(int archerIndex)
     {
-        Gm.ChangeCoinAmount(-40);
         Gm.ActivateFastenArcher(archerIndex);
+        Gm.ChangeCoinAmount(-40);
         AudioManager.Instance.Play(ClipType.BuySound);
     }
     
     private void OnArcherDamageButton(int archerIndex)
     {
-        Gm.ChangeCoinAmount(-50);
         Gm.ActivateDamageArcher(archerIndex);
+        Gm.ChangeCoinAmount(-50);
         AudioManager.Instance.Play(ClipType.BuySound);
     }
     

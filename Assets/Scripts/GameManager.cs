@@ -183,7 +183,7 @@ public class GameManager : MonoBehaviour
                 theQueen.SetActive(true);
                 inverseLerp = Mathf.InverseLerp(400f, 600f, numOfEnemies);
                 spawnIntervalTime = Mathf.Lerp(0.2f, 0.1f, inverseLerp);
-                theQueen.SetSpeed(Mathf.Lerp(2f, 6f, inverseLerp));
+                theQueen.SetSpeed(Mathf.Lerp(2f, 4f, inverseLerp));
                 
                 selectedEnemy = fatedNumber switch {
                     < 33 => 2,
@@ -193,7 +193,7 @@ public class GameManager : MonoBehaviour
             case 10:
                 theQueen.SetActive(true);
                 spawnIntervalTime = 0.05f;
-                theQueen.SetSpeed(10f);
+                theQueen.SetSpeed(5f);
 
                 selectedEnemy = 4;
                 break;
@@ -206,8 +206,8 @@ public class GameManager : MonoBehaviour
         {
             < 8 => Random.Range(1, 3),
             < 9 => Random.Range(2, 5),
-            < 10 => Random.Range(5, 10),
-            _ => 30
+            < 10 => Random.Range(3, 7),
+            _ => 8
         };
     }
 

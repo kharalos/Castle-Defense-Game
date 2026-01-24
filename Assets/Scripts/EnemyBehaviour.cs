@@ -190,7 +190,10 @@ public class EnemyBehaviour : MonoBehaviour
         Instantiate(GameManager.Instance.goldCoin, new Vector3(transform.position.x, 4f, transform.position.z),Quaternion.identity);
         enemyIsAlive = false;
         _agent.isStopped = true;
-        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+        var rb = gameObject.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezePosition;
+        rb.angularVelocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
         this.gameObject.GetComponent<CapsuleCollider>().enabled = false;
         _agent.enabled = false;
         GameManager.Instance.IncreaseSlainEnemies(this);
